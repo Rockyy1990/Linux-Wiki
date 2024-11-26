@@ -1,0 +1,90 @@
+Optimizing the `sysctl` settings for performance and gaming on Arch Linux (or any Linux distribution) can help improve system responsiveness and reduce latency. Below is a Bash script that applies common `sysctl` settings that are generally recommended for gaming and performance improvements.
+
+Please make sure to run the script with root privileges, as it will modify system settings. Before running the script, it's also advisable to back up your current `sysctl` settings.
+
+Here's a sample script for optimizing `sysctl`:
+
+```bash
+#!/bin/bash
+
+# Check if the script is run as root
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root"
+    exit 1
+fi
+
+# Create a backup of current sysctl settings
+cp /etc/sysctl.conf /etc/sysctl.conf.bak
+sysctl -a > /etc/sysctl.conf.sysctl-backup
+
+# Optimizing sysctl settings for performance and gaming
+cat <<EOL >> /etc/sysctl.conf
+
+# Increase the maximum number of open files
+fs.file-max = 100000
+
+# Disable transparent hugepages (THP) - gaming performance
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+
+# Reduce swappiness to make the system prefer cached data instead of swap
+vm.swappiness = 10
+
+# Increase the size of the file system page cache
+vm.dirty_ratio = 10
+vm.dirty_background_ratio = 5
+
+# Disable IPv6 if not in use, as it can have performance penalties
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+
+# Improve TCP performance
+net.core.wmem_max = 12582912
+net.core.rmem_max = 12582912
+net.ipv4.tcp_rmem = 4096 87380 16777216
+net.ipv4.tcp_wmem = 4096 65536 16777216
+net.ipv4.tcp_fin_timeout = 15
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 0
+net.ipv4.tcp_sack = 1
+net.ipv4.tcp_no_metrics_save = 1
+
+# Set time_wait to a lower value
+net.ipv4.tcp_time_wait_reuse = 1
+
+# Wi-Fi improvements (if applicable)
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.all.rp_filter = 1
+
+# Enable CPU performance governor
+kernel.sched_autogroup_enabled = 0
+
+EOL
+
+# Apply the changes
+sysctl -p
+
+echo "Sysctl settings optimized for performance and gaming."
+```
+
+### How to Use the Script
+1. Copy the script above and save it to a file, for example `optimize_sysctl.sh`.
+2. Make the script executable:
+   ```bash
+   chmod +x optimize_sysctl.sh
+   ```
+3. Run the script with root privileges:
+   ```bash
+   sudo ./optimize_sysctl.sh
+   ```
+
+### Important Notes
+- **Backup**: The script creates a backup of your original `sysctl` configuration.
+- **THP**: Disabling Transparent Huge Pages (THP) can improve performance for certain applications, especially games. You may need to add this command to your startup scripts since the value might reset after reboot (e.g., in `/etc/rc.local` or create a systemd service).
+- **Networking**: Adjustments to TCP settings can greatly improve performance in online gaming.
+- **Testing**: After applying these settings, you should monitor your system and adjust as necessary. Settings that work for one user may not work for another depending on specific hardware and use cases.
+- **Revert Changes**: To revert changes, you can restore the backup using:
+   ```bash
+   cp /etc/sysctl.conf.bak /etc/sysctl.conf
+   ```
+
+Lastly, always consider the specific needs of your system and applications before heavily modifying kernel parameters. Experimentation might be needed to achieve the best balance of performance for your particular use case.

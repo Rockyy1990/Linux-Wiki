@@ -1,0 +1,48 @@
+# /etc/pacman.conf
+
+# General options
+[options]
+# Add the default Pacman options here
+CacheDir     = /var/cache/pacman/pkg/
+LogFile      = /var/log/pacman.log
+LockFile     = /var/lib/pacman/db.lck
+LocalFile    = /var/lib/pacman/local/
+# XferCommand = /usr/bin/curl -L -C - -o %o %u
+
+HoldPkg     = pacman glibc
+Architecture = auto
+IgnorePkg   =
+Color
+TotalDownload
+CheckSpace
+VerbosePkgLists
+ILoveCandy
+SigLevel    = Required DatabaseOptional
+LocalFileSigLevel = Optional
+
+
+# Pacman package repositories
+[core]
+Include = /etc/pacman.d/mirrorlist
+
+[extra]
+Include = /etc/pacman.d/mirrorlist
+
+[community]
+Include = /etc/pacman.d/mirrorlist
+
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+
+# The testing repositories are disabled by default.
+# [testing]
+# Include = /etc/pacman.d/mirrorlist
+
+# Additional packages from Arch User Repository (AUR)
+# Note: The AUR is not managed by pacman; you can use an AUR helper like yay or paru.
+# The AUR is not officially supported; use it at your own risk.
+
+# Add your custom repositories here
+#[myrepo]
+#SigLevel = Optional TrustAll
+#Server = http://myrepo.server/$arch

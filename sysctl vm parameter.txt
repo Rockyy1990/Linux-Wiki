@@ -1,0 +1,53 @@
+Die angegebenen Zeilen stellen eine Konfiguration von Kernel-Parametern in einem Linux-System dar, die in der Datei `/etc/sysctl.conf` oder in einer ähnlichen Konfigurationsdatei definiert werden können. Diese Parameter steuern das Verhalten des virtuellen Speichers (VM) und anderer Speichermechanismen im Linux-Kernel. Hier ist eine Beschreibung der einzelnen Parameter:
+
+1. **vm.swappiness = 1**: Dieser Parameter steuert, wie aggressiv das System den RAM freigibt. Ein Wert von 1 bedeutet, dass das System erst dann swappt, wenn der RAM sehr voll ist, was zu einer besseren Leistung führen kann.
+
+2. **vm.vfs_cache_pressure = 50**: Dieser Parameter beeinflusst, wie viel Speicher dem VFS-Cache (Virtual File System) zugewiesen wird. Ein niedriger Wert bedeutet, dass das System den Cache weniger aggressiv leert.
+
+3. **vm.overcommit_memory = 1**: Dieser Parameter steuert, wie der Kernel mit dem Speichermanagement umgeht. Ein Wert von 1 bedeutet, dass das System immer speicheranfragen akzeptiert, auch wenn nicht genügend physischer Speicher vorhanden ist.
+
+4. **vm.overcommit_ratio = 50**: Dieser Wert funktioniert in Verbindung mit `vm.overcommit_memory`. Er definiert den Prozentsatz des gesamten RAMs, der für Prozesse über den tatsächlichen verfügbaren Speicher hinaus bereitgestellt werden kann.
+
+5. **vm.dirty_background_ratio = 5**: Dieser Parameter bestimmt den maximalen Anteil des speicher- (dirty memory), der für Hintergrundoperationen erlaubt ist, bevor das Schreiben in den Festplattenspeicher beginnt.
+
+6. **vm.dirty_ratio = 10**: Dies ist der maximale Anteil des speichers, der schmutzig sein darf, bevor das System beginnt, schmutzige Seiten aktiv auf die Festplatte zu schreiben.
+
+7. **vm.stat_interval = 60**: Dies ist das Intervall (in Sekunden), in dem Statistiken über den virtuellen Speicher aktualisiert werden.
+
+8. **vm.page-cluster = 0**: Dies legt die Anzahl der Seiten fest, die bei einer einzigen I/O-Operation gelesen oder geschrieben werden. Ein Wert von 0 bedeutet, dass immer eine einzelne Seite verarbeitet wird.
+
+9. **vm.dirty_expire_centisecs = 500**: Dieser Parameter legt fest, wie lange (in Hundertstelsekunden) eine schmutzige Seite im Speicher verweilen kann, bevor sie als veraltet betrachtet wird und geschrieben wird.
+
+10. **vm.oom_dump_tasks = 1**: Wenn sich das System im Out-Of-Memory (OOM) Zustand befindet, zeigt dieser Parameter an, ob die laufenden Prozesse beim OOM-Killer-Dump angezeigt werden sollen.
+
+11. **vm.oom_kill_allocating_task = 1**: Wenn der OOM-Killer aktiviert wird, wird der Prozess, der Speicher anfordert und keinen erhält, zum Beenden ausgewählt.
+
+12. **vm.extfrag_threshold = 500**: Dieser Parameter beeinflusst die Fragmentierungsbehandlung im Speicher. Ein höherer Wert bedeutet, dass das System toleranter gegenüber extremer Fragmentierung ist.
+
+13. **vm.block_dump = 0**: Dieser Parameter steuert die Protokollierung von Blockoperationen. Ein Wert von 0 bedeutet, dass diese Funktion deaktiviert ist.
+
+14. **vm.reap_mem_on_sigkill = 1**: Diese Einstellung legt fest, dass der Arbeitsspeicher beim Empfang eines SIGKILL-Signals (was ein sofortiges Beenden eines Prozesses ist) freigegeben wird.
+
+15. **vm.panic_on_oom = 0**: Dies bestimmt, ob das System bei einem OOM-Zustand (Out of Memory) abstürzt (panics) oder weiterhin versucht, Prozesse zu beenden. Ein Wert von 0 bedeutet, dass es nicht abstürzt.
+
+16. **vm.zone_reclaim_mode = 0**: Dieser Parameter steuert den Modus der Zonenrückgewinnung für den Speicher. Ein Wert von 0 bedeutet, dass der Kernel keine Zonenrückgewinnung durchführt.
+
+17. **vm.scan_unevictable_pages = 0**: Dieser Parameter legt fest, ob das System „nicht auslagerbare Seiten“ beim Scannen für die Speicherfreigabe berücksichtigen soll. Ein Wert von 0 bedeutet, dass dies nicht der Fall ist.
+
+18. **vm.compact_unevictable_allowed = 1**: Dies bedeutet, dass das Komprimieren nicht auslagerbarer Seiten erlaubt ist, um Speicher freizugeben.
+
+19. **vm.compaction_proactiveness = 0**: Dieser Parameter definiert, wie aggressiv der Kernel den Speicher komprimiert, um Fragmentierung zu reduzieren. Ein Wert von 0 bedeutet, dass der Kernel minimal proaktiv vorgeht.
+
+20. **vm.page_lock_unfairness = 1**: Dies hat Auswirkungen auf die Fairness bei der Sperrvergabe für Seiten. Ein Wert von 1 zeigt an, dass es zu Ungerechtigkeiten im Zugriff kommen kann, was in bestimmten Anwendungen von Bedeutung sein könnte.
+
+21. **vm.percpu_pagelist_high_fraction = 0**: Definiert den maximalen Anteil von Seitenlisten pro CPU, der erreicht werden kann. Ein Wert von 0 bedeutet, dass es keine spezifische Grenze gibt.
+
+22. **vm.pagecache = 1**: Dies aktiviert den Seiten-Cache, der eine schnelle Speicherung laufend benötigter Daten ermöglicht.
+
+23. **vm.watermark_scale_factor = 1**: Dies steuert den Kontrolldruck für die Wasserzeichen bei der Speicherverwaltung. Ein Wert von 1 entspricht der Standardkonfiguration.
+
+24. **vm.memory_failure_recovery = 0**: Dieser Parameter steuert, ob das System eine Fehlerkorrektur für fehlerhaften Speicher versucht. Ein Wert von 0 bedeutet, dass die Fehlerbehebung nicht aktiviert ist.
+
+25. **vm.max_map_count = 262144**: Legt die maximale Anzahl von Speicherbereichen fest, die ein Prozess haben kann. Ein höherer Wert bedeutet, dass Prozesse mehr Speichermappen erhalten können, was in Umgebungen mit vielen offenen Dateien nützlich sein kann.
+
+Diese Parameter sind wichtig für Administratoren, die Leistung und Verhalten des Speichers eines Linux-Systems feinabstimmen möchten, um spezifische Anforderungen zu erfüllen, wie z. B. die Optimierung von Anwendungen, die große Mengen an RAM oder spezielle I/O-Operationen nutzen.

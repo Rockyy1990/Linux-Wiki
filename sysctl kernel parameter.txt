@@ -1,0 +1,35 @@
+Die aufgeführten Zeilen sind Kernel-Parameter, die in einem Linux- oder Unix-basierten Betriebssystem konfiguriert werden können. Diese Parameter steuern verschiedene Aspekte des Verhaltens und der Leistung des Kernels. Hier ist eine Übersicht über einige der wichtigsten Parameter:
+
+1. **kernel.io_delay_type**: Dieser Parameter steuert den Typ der IO-Verzögerung, wobei die genaue Implementierung je nach Kernel-Version variieren kann.
+
+2. **kernel.task_delayacct**: Wenn auf 1 gesetzt, wird die Zeit, die von einem Task benötigt wird, aufgezeichnet.
+
+3. **kernel.sysrq**: Aktiviert oder deaktiviert die SysRq-Funktion, die spezielle Befehle zur Systemverwaltung ermöglicht.
+
+4. **kernel.watchdog_thresh**: Bestimmt die Schwelle für das Watchdog-Timeout, d.h. die Zeit, die verstreichen muss, bevor ein System-Timeout ausgelöst wird.
+
+5. **kernel.nmi_watchdog**: Ein nicht-maskierbarer Interrupt (NMI) Watchdog, der helfen kann, festzustellen, ob das System aufhört zu reagieren.
+
+6. **kernel.seccomp**: Aktiviert die Secure Computing (Seccomp)-Schnittstelle, um die Systemaufrufe eines Prozesses einzuschränken.
+
+7. **kernel.timer_migration**: Steuert, ob Timer zwischen CPUs migriert werden können.
+
+8. **kernel.core_pipe_limit**: Setzt das Limit für die Anzahl der gleichzeitigen Kernels, die über Pipe verarbeitet werden können.
+
+9. **kernel.hung_task_timeout_secs**: Bestimmt die Zeitspanne, nach der ein festhängender Task als nicht mehr reagierend angesehen wird.
+
+10. **kernel.sched_* (Scheduler Parameter)**: Diese Parameter steuern verschiedene Aspekte der Prozessplanung, z.B. wie Threads zu CPUs zugeordnet werden, welche Prioritäten sie haben, und wie die Zeitscheiben (timeslices) verteilt werden.
+
+11. **kernel.numa_balancing**: Aktiviert oder deaktiviert die NUMA-Balancierung, um den Speicherzugriff in Systemen mit Non-Uniform Memory Access (NUMA) zu optimieren.
+
+12. **kernel.panic**: Steuert, ob das System bei einem Kernel-Panic automatisch neu gestartet wird.
+
+13. **kernel.kptr_restrict**: Bestimmt, ob die Kernel-Pointer-Informationen von Benutzern angezeigt werden dürfen.
+
+14. **kernel.randomize_va_space**: Aktiviert die Randomisierung des virtuellen Adressraums zum Schutz gegen bestimmte Angriffe.
+
+15. **kernel.kexec_load_disabled**: Wenn auf 1 gesetzt, bedeutet dies, dass die kexec-Funktion, die einen schnellen Neustart des Kernels ermöglicht, deaktiviert ist.
+
+16. **kernel.yama.ptrace_scope**: Dieser Parameter steuert die Sicherheit von ptrace, um Nachverfolgen von Prozessen einzuschränken und potenzielle Sicherheitsprobleme zu vermindern.
+
+Die genauen Werte und ihre Bedeutung können je nach Kernel-Version und Distribution variieren, und einige Optionen könnten in bestimmten Systemen nicht verfügbar oder nicht relevant sein. Das Ändern dieser Parameter kann erhebliche Auswirkungen auf das Systemverhalten, die Sicherheit und die Leistung haben, daher sollten diese Einstellungen mit Vorsicht und Verständnis geändert werden.

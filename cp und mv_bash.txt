@@ -1,0 +1,94 @@
+Die Bash-Kommandos cp und mv sind grundlegende Befehle in Unix-ähnlichen Betriebssystemen, die in der Kommandozeile verwendet werden, um Dateien und Verzeichnisse zu kopieren und zu verschieben. Hier sind die Beschreibungen und einige nützliche Beispiele für beide Befehle:
+Befehl cp
+
+Der cp-Befehl wird verwendet, um Dateien und Verzeichnisse zu kopieren.
+Syntax
+
+ 
+cp [OPTIONEN] Quelldatei Zieldatei
+
+Nützliche Beispiele
+
+    Einzelne Datei kopieren:
+
+     
+    cp datei.txt kopie_datei.txt
+
+    Dies erstellt eine Kopie von datei.txt mit dem Namen kopie_datei.txt.
+
+    Verzeichnis rekursiv kopieren:
+
+     
+    cp -r mein_verzeichnis/ kopie_mein_verzeichnis/
+
+    Dies kopiert das gesamte Verzeichnis mein_verzeichnis in ein neues Verzeichnis namens kopie_mein_verzeichnis.
+
+    Kopieren mit Bestätigungsaufforderung:
+
+     
+    cp -i datei.txt kopie_datei.txt
+
+    Die -i-Option fordert eine Bestätigung vor dem Überschreiben einer vorhandenen Datei.
+
+    Kopieren mit Erhaltung der Attribute:
+
+     
+    cp -p datei.txt kopie_datei.txt
+
+    Die -p-Option bewahrt Zeitstempel und Berechtigungen der Datei.
+
+    Kopieren aller Dateien mit einem bestimmten Muster:
+
+     
+    cp *.txt backup/
+
+    Dies kopiert alle .txt-Dateien im aktuellen Verzeichnis in das Verzeichnis backup.
+
+Befehl mv
+
+Der mv-Befehl wird verwendet, um Dateien und Verzeichnisse zu verschieben oder umzubenennen.
+Syntax
+
+ 
+mv [OPTIONEN] Quelldatei Zieldatei
+
+Nützliche Beispiele
+
+    Datei umbenennen:
+
+     
+    mv alte_datei.txt neue_datei.txt
+
+    Dies benennt die Datei alte_datei.txt in neue_datei.txt um.
+
+    Datei in ein anderes Verzeichnis verschieben:
+
+     
+    mv datei.txt /home/user/zielverzeichnis/
+
+    Dies verschiebt datei.txt in das angegebene Zielverzeichnis.
+
+    Verzeichnis umbenennen:
+
+     
+    mv altes_verzeichnis/ neues_verzeichnis/
+
+    Dies benennt altes_verzeichnis in neues_verzeichnis um.
+
+    Verschieben mehrerer Dateien:
+
+     
+    mv *.txt zielverzeichnis/
+
+    Dies verschiebt alle .txt-Dateien in das zielverzeichnis.
+
+    Verschieben mit Bestätigungsaufforderung:
+
+     
+    mv -i datei.txt /home/user/zielverzeichnis/
+
+    Die -i-Option fordert eine Bestätigung vor dem Überschreiben einer Datei im Zielverzeichnis.
+
+Fazit
+
+Die Befehle cp und mv sind äußerst nützlich für die Dateiverwaltung unter Linux und Unix. Es ist wichtig, die verschiedenen Optionen zu kennen, um sie effizient und sicher nutzen zu können.

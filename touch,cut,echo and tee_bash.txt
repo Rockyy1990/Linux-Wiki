@@ -1,0 +1,68 @@
+Hier sind einige nützliche Beispiele für die Verwendung der Kommandos touch, cut, echo und tee in der Kommandozeile (Shell) unter Linux oder macOS:
+
+1. touch
+
+Das touch-Kommando wird verwendet, um Dateien zu erstellen oder die Zeitstempel bestehender Dateien zu aktualisieren.
+
+Beispiel: Erstellen einer neuen Datei
+
+ touch neue_datei.txt
+
+Beispiel: Aktualisieren des Zeitstempels einer Datei
+
+ touch existierende_datei.txt
+
+2. cut
+
+Das cut-Kommando wird verwendet, um Teile von Zeilen aus einer Datei oder von der Standardeingabe zu extrahieren.
+
+Beispiel: Extrahieren der ersten Spalte aus einer durch Kommas getrennten Datei
+
+ cut -d ',' -f 1 datei.csv
+
+Beispiel: Extrahieren der Zeichen 1 bis 5 aus einer Datei
+
+ cut -c 1-5 textdatei.txt
+
+3. echo
+
+Das echo-Kommando wird verwendet, um Text oder die Werte von Variablen in die Standardausgabe auszugeben.
+
+Beispiel: Einfache Ausgabe
+
+ echo "Hallo Welt"
+
+Beispiel: Ausgabe der Inhalte einer Variablen
+
+ name="Max"
+ echo "Der Name ist $name"
+
+4. tee
+
+Das tee-Kommando wird verwendet, um die Ausgabe von einem Kommando gleichzeitig auf die Konsole und in eine Datei zu leiten.
+
+Beispiel: Ausgabe in eine Datei schreiben und gleichzeitig anzeigen. tee -a überschreibt nicht sondern hängt etwas an die jeweilige datei dran.
+
+ echo "Dies ist eine Zeile" | tee ausgabe.txt
+ echo "Dies ist eine Zeile" | sudo tee ausgabe.txt  # Für configs die root privilegien brauchen.
+ 
+
+
+Beispiel: Mehrere Zeilen in eine Datei schreiben
+
+ echo -e "Zeile 1
+ Zeile 2
+ Zeile 3" | tee -a ausgabe.txt
+
+Kombination der Kommandos
+
+Hier ist ein Beispiel, in dem alle vier Kommandos zusammen verwendet werden:
+
+Beispiel für eine Pipeline
+
+ echo "Spalte1,Spalte2,Spalte3" | tee daten.csv | cut -d ',' -f 1
+
+In diesem Beispiel wird zuerst der Text in die Datei daten.csv geschrieben und anschließend die erste Spalte ausgegeben.
+Fazit
+
+Diese Kommandos sind sehr nützlich, um mit Dateien zu arbeiten, Daten zu extrahieren und Ausgaben effizient zu verarbeiten. Du kannst sie gemäß deinen Anforderungen anpassen und kombinieren!

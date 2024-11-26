@@ -1,0 +1,103 @@
+Die Datei `/etc/environment` ist eine Konfigurationsdatei in Arch Linux (und anderen Linux-Distributionen), die zur Festlegung von Umgebungsvariablen verwendet wird. Hier ist eine Liste von 20 nützlichen Beispielen für Variablen, die in `/etc/environment` festgelegt werden können:
+
+1. **LANG**: Legt die Standardsprache und Locale fest.
+   ```bash
+   LANG=de_DE.UTF-8
+   ```
+
+2. **LC_ALL**: Setzt die Locale für alle Berechtigungen.
+   ```bash
+   LC_ALL=de_DE.UTF-8
+   ```
+
+3. **EDITOR**: Bestimmt den Standard-Texteditor.
+   ```bash
+   EDITOR=nano
+   ```
+
+4. **SHELL**: Legt die Standardshell für Benutzer fest.
+   ```bash
+   SHELL=/bin/bash
+   ```
+
+5. **PATH**: Fügt zusätzliche Verzeichnisse zum Suchpfad für ausführbare Dateien hinzu.
+   ```bash
+   PATH=$PATH:/usr/local/bin:/opt/bin
+   ```
+
+6. **HISTSIZE**: Bestimmt die Anzahl der Zeilen, die in der Bash-Historie gespeichert werden.
+   ```bash
+   HISTSIZE=1000
+   ```
+
+7. **HISTFILESIZE**: Legt die maximale Anzahl der Zeilen in der History-Datei fest.
+   ```bash
+   HISTFILESIZE=2000
+   ```
+
+8. **PAPERSIZE**: Gibt die Standard-Papiergröße für Druckaufträge an.
+   ```bash
+   PAPERSIZE=a4
+   ```
+
+9. **GDK_SCALE**: Steuert die DPI-Skalierung für GTK-Anwendungen.
+   ```bash
+   GDK_SCALE=2
+   ```
+
+10. **QT_SCALE_FACTOR**: Steuert die DPI-Skalierung für Qt-Anwendungen.
+    ```bash
+    QT_SCALE_FACTOR=2
+    ```
+
+11. **NO_PROXY**: Definiert eine Liste von Hosts, die von Proxy-Servern ausgenommen sind.
+    ```bash
+    NO_PROXY=localhost,127.0.0.1
+    ```
+
+12. **http_proxy**: Setzt die Umgebungsvariable für den HTTP-Proxy.
+    ```bash
+    http_proxy=http://proxy.example.com:8080
+    ```
+
+13. **https_proxy**: Setzt die Umgebungsvariable für den HTTPS-Proxy.
+    ```bash
+    https_proxy=https://proxy.example.com:8080
+    ```
+
+14. **ftp_proxy**: Legt den FTP-Proxy fest.
+    ```bash
+    ftp_proxy=ftp://proxy.example.com:8080
+    ```
+
+15. **JAVA_HOME**: Gibt den Installationspfad für Java an.
+    ```bash
+    JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+    ```
+
+16. **NODE_PATH**: Setzt das Verzeichnis für globale Node.js-Module.
+    ```bash
+    NODE_PATH=/usr/lib/node_modules
+    ```
+
+17. **DISPLAY**: Bestimmt, wo grafische Ausgaben angezeigt werden.
+    ```bash
+    DISPLAY=:0
+    ```
+
+18. **XDG_DATA_HOME**: Legt das Verzeichnis für die Benutzerdaten fest.
+    ```bash
+    XDG_DATA_HOME=$HOME/.local/share
+    ```
+
+19. **XDG_CONFIG_HOME**: Gibt das Verzeichnis für die Benutzerkonfiguration an.
+    ```bash
+    XDG_CONFIG_HOME=$HOME/.config
+    ```
+
+20. **PYTHONPATH**: Setzt den Suchpfad für Python-Module.
+    ```bash
+    PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.x/site-packages
+    ```
+
+Jede dieser Variablen kann angepasst werden, um den spezifischen Anforderungen des Systems oder des Benutzers gerecht zu werden. Um die Änderungen wirksam zu machen, ist es manchmal notwendig, den Dienst oder die Shell neu zu starten.

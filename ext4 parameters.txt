@@ -1,0 +1,21 @@
+ 
+To maximize performance for ext4 file system, you can consider the following options:
+
+    Mount options:
+        noatime:        Disable updating the access timestamps on files, reducing disk I/O.
+        nodiratime:     Disable updating directory access timestamps, providing further I/O reduction.
+        data=writeback  Use writeback mode for data journaling, which improves performance at the cost of potential data loss in case of power failure or system crash.
+        barrier=0:      Disable barriers, which can improve performance in some cases but may increase the risk of data corruption in case of power failure or system crash.
+        Example of mounting with these options: mount -o noatime,nodiratime,data=writeback,barrier=0 /dev/sdx /mnt
+
+    Allocation policies:
+        extent-based allocation (default): It allocates large contiguous blocks for files, reducing fragmentation and improving read/write performance.
+        delayed allocation:                It delays the actual allocation of disk blocks until necessary, reducing disk I/O and improving performance.
+        journaling mode:                   You can choose between data=ordered (default), data=writeback, or data=journal for different tradeoffs between performance and data integrity.
+
+    File system tuning:
+        Increase the filesystem read-ahead value (/sys/block/<device>/queue/read_ahead_kb) to a larger size to optimize disk access patterns for files and directories.
+        Disable or minimize the disk write-caching (if it is enabled) to ensure data consistency but at the expense of performance.
+
+It is essential to note that while these options can improve performance, they may also increase the risk of data loss or corruption.
+It is recommended to carefully evaluate the trade-offs and backup important data regularly.

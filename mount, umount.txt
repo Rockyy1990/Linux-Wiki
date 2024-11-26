@@ -1,0 +1,62 @@
+Die Befehle mount und umount sind in Unix-ähnlichen Betriebssystemen (wie Linux) zentrale Werkzeuge für den Zugriff auf Dateisysteme.
+Mount
+
+Der Befehl mount wird verwendet, um ein Dateisystem (z. B. eine Festplatte, eine Partition oder ein externes Speichermedium) in das Verzeichnisbaum des Systems einzufügen. Ein Dateisystem muss gemountet werden, bevor der Benutzer darauf zugreifen kann.
+
+Syntax:
+
+ mount [Optionen] <Gerät> <Mountpunkt>
+
+    <Gerät>: Das zu mountende Speichergerät (z. B. /dev/sdb1).
+    <Mountpunkt>: Der Verzeichnispfad, unter dem das Gerät eingebunden werden soll (z. B. /mnt/usb).
+
+Beispiel 1: USB-Stick mounten
+
+    Zuerst stecken Sie einen USB-Stick an.
+    Überprüfen Sie, wo der Stick erkannt wird:
+
+     lsblk
+
+    Nehmen wir an, der Stick erscheint als /dev/sdb1.
+    Erstellen Sie ein Mount-Verzeichnis:
+
+     sudo mkdir /mnt/usb
+
+    Mounten Sie den USB-Stick:
+
+     sudo mount /dev/sdb1 /mnt/usb
+
+    Jetzt können Sie auf die Dateien im USB-Stick über /mnt/usb zugreifen.
+
+Umount
+
+Der Befehl umount wird verwendet, um ein zuvor gemountetes Dateisystem vom Verzeichnisbaum abzukoppeln. Bevor man ein Dateisystem umounten kann, müssen alle offenen Dateien auf diesem Dateisystem geschlossen sein.
+
+Syntax:
+
+ umount [Optionen] <Mountpunkt oder Gerät>
+
+Beispiel 2: USB-Stick umounten Um den zuvor gemounteten USB-Stick sicher zu entfernen:
+
+    Stellen Sie sicher, dass keine Dateien von /mnt/usb geöffnet sind.
+    Führen Sie den Befehl aus:
+
+     sudo umount /mnt/usb
+
+    Jetzt kann der USB-Stick sicher abgezogen werden.
+
+Wichtige Hinweise
+
+    Wenn das gemountete Dateisystem nicht umounten kann, gibt es möglicherweise aktive Prozesse, die darauf zugreifen. Dies können Sie mit dem Befehl lsof überprüfen:
+
+     lsof /mnt/usb
+
+    Forcieren Sie den umount-Befehl (unter Vorsicht!), wenn keine aktiven Prozesse mehr auf das Dateisystem zugreifen:
+
+     sudo umount -l /mnt/usb
+
+    Dies führt zu einem "lazy umount", bei dem das Dateisystem erst unmountet wird, wenn es nicht mehr verwendet wird.
+
+Fazit
+
+Die Nutzung von mount und umount ist entscheidend für den Umgang mit externen Speichermedien und anderen Dateisystemen in einem Linux-basierten System. Es sorgt dafür, dass Datenintegrität und Sicherheit gewährleistet sind.

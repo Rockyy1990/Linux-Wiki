@@ -1,0 +1,75 @@
+Ein Linux-Kernel-Scheduler ist dafür verantwortlich, die CPU-Zeit effizient zwischen verschiedenen Prozessen und Threads zu verteilen. Er entscheidet, welcher Prozess oder Thread als nächstes ausgeführt wird, basierend auf definierten Algorithmen und Prioritäten, um eine möglichst faire und reaktionsschnelle Systemleistung zu gewährleisten. Dabei berücksichtigt der Scheduler verschiedene Faktoren wie Prozesspriorität, CPU-Auslastung und die Art der Aufgaben (z. B. interaktive vs. batch-Verarbeitung).
+
+Die angegebenen Zeilen enthalten Kernel-Parameter, die das Verhalten des Linux-Schedulers steuern. 
+Hier sind einige Erklärungen zu den Parametern, möglichen Werten und deren Auswirkungen:
+
+
+1. **kernel.sched_rr_timeslice_ms = -1**: 
+   - Steuert die Zeitscheibe für Real-Time-Tasks im Round-Robin-Scheduling.
+   - Mögliche Werte: Positive Zahlen (z.B. `5` für 5 ms) setzen die Zeitscheibe; `-1` bedeutet, dass der Scheduler keine feste Zeit hat (unbeschränkt).
+
+2. **kernel.sched_rt_runtime_us = -1**: 
+   - Die maximale Laufzeit für Echtzeittasks in Mikrosekunden.
+   - Mögliche Werte: Positive Zahlen setzen eine Laufzeit; `-1` bedeutet keine Begrenzung.
+
+3. **kernel.sched_rt_period_us = 1**: 
+   - Die Zeitperiode für die Scheduling-Bestimmungen.
+   - Mögliche Werte: Typischerweise von einigen Mikrosekunden bis zu Sekundeneinheiten (z.B. `1000000` für 1 Sekunde).
+
+4. **kernel.sched_child_runs_first = 1**: 
+   - Bestimmt, ob das Kind-Task zuerst läuft, nachdem ein Fork stattgefunden hat.
+   - Mögliche Werte: `0` (Eltern-Task läuft zuerst) oder `1` (Kind-Task läuft zuerst).
+
+5. **kernel.sched_tunable_scaling = 1**: 
+   - Aktiviert die skalierbare Scheduling-Politik.
+   - Mögliche Werte: `0` (deaktiviert), `1` (aktiviert).
+
+6. **kernel.sched_schedstats = 0**: 
+   - Aktiviert oder deaktiviert die Scheduling-Statistik.
+   - Mögliche Werte: `0` (deaktiviert), `1` (aktiviert).
+
+7. **kernel.sched_energy_aware = 0**: 
+   - Steuert die Energiebewusstheit des Schedulers.
+   - Mögliche Werte: `0` (nicht energiebewusst), `1` (energiebewusst).
+
+8. **kernel.sched_autogroup_enabled = 0**: 
+   - Aktiviert oder deaktiviert die automatische Gruppierung von Tasks.
+   - Mögliche Werte: `0` (deaktiviert), `1` (aktiviert).
+
+9. **kernel.sched_compat_yield = 0**: 
+   - Bestimmt, ob der Scheduler eine Kompatibilitätsausgabe für yield() bereitstellt.
+   - Mögliche Werte: `0` (deaktiviert) oder `1` (aktiviert).
+
+10. **kernel.sched_min_task_util_for_colocation = 0**: 
+    - Mindestnutzen für die Ko-lokation von Tasks.
+    - Mögliche Werte: Typischerweise zwischen `0` und `100`.
+    
+11. **kernel.sched_nr_migrate = 4**: 
+    - Anzahl der Tasks, die gleichzeitig migriert werden können.
+    - Mögliche Werte: Positive ganze Zahlen, z.B. `1`, `2`, `8`, etc.
+
+12. **kernel.sched_migration_cost_ns = 100000**: 
+    - Die Kosten in Nanosekunden zur Migration eines Tasks.
+    - Mögliche Werte: Positive Zahlen, typischerweise viel kleiner oder größer, je nach Systemarchitektur.
+
+13. **kernel.sched_latency_ns = 100000**: 
+    - Maximale Latenz in Nanosekunden für den Scheduler.
+    - Mögliche Werte: Oft von `100000` bis `10000000` (10 ms) oder mehr.
+
+14. **kernel.sched_min_granularity_ns = 100000**: 
+    - Die minimale Granularität in Nanosekunden für Scheduling-Entscheidungen.
+    - Mögliche Werte: Kann von `10000` (10 µs) bis `1000000` (1ms) gehen und mehrere Werte dazwischen.
+
+15. **kernel.sched_wakeup_granularity_ns = 1000**: 
+    - Granularität in Nanosekunden, die bestimmt, wie lange man warten muss, bevor ein Task geweckt wird.
+    - Mögliche Werte: Negative Zahlen nicht sinnvoll; Werte typischerweise im Bereich von `100` bis `1000000`.
+
+16. **kernel.sched_scaling_enable = 1**: 
+    - Aktiviert die Skalierung von Scheduling-Parametern.
+    - Mögliche Werte: `0` (deaktiviert), `1` (aktiviert).
+
+17. **kernel.sched_itmt_enabled = 1**: 
+    - Aktiviert die interaktive Task-Management-Technologie.
+    - Mögliche Werte: `0` (deaktiviert), `1` (aktiviert).
+
+Diese Parameter ermöglichen es Benutzern, den Scheduler (z.B. CFS – Completely Fair Scheduler) an die spezifischen Anforderungen ihres Systems oder ihrer Anwendungen anzupassen.

@@ -1,0 +1,15 @@
+Basic Structure of /etc/fstab
+
+Each line in /etc/fstab describes one filesystem to be mounted. The typical syntax of a line in fstab is as follows:
+
+ 
+<device> <mount_point> <filesystem_type> <options> <dump> <pass>
+
+Where:
+
+    <device>: The block device or partition (e.g., /dev/sda1 or /dev/disk/by-uuid/...).
+    <mount_point>: The directory where the filesystem will be mounted (e.g., /mnt/xfsdata).
+    <filesystem_type>: The type of filesystem (e.g., xfs).
+    <options>: Mount options (e.g., defaults, noatime, etc.).
+    <dump>: Used by the dump command to determine which filesystems need to be dumped (0 or 1).
+    <pass>: Used by fsck to determine the order in which filesystem checks are done at boot time (0 means no check).

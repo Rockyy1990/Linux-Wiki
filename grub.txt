@@ -1,0 +1,63 @@
+The default GRUB (GRand Unified Bootloader) configuration file is typically located at `/boot/grub/grub.cfg` on a Linux system, and it's generated from `/etc/default/grub` and the scripts in `/etc/grub.d/`. The primary configuration file, `/etc/default/grub`, contains key settings that influence the GRUB menu appearance and behavior. Here's a common structure for a default `/etc/default/grub` file:
+
+```bash
+# /etc/default/grub
+GRUB_DEFAULT=0                    # Set the default boot entry (starting from 0)
+GRUB_TIMEOUT=5                     # Set the timeout before the default entry is booted
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`  # Distribution name
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"  # Kernel parameters passed at boot
+GRUB_CMDLINE_LINUX=""              # Additional kernel parameters
+```
+
+### Common GRUB Options
+- **GRUB_DEFAULT**: This variable is used to specify which menu entry is selected by default. The options can be index-based (0 for the first entry) or a specific menu entry name.
+  
+- **GRUB_TIMEOUT**: Specifies the time in seconds before automatically booting the default entry. If set to `0` or `-1`, it disables the timeout.
+
+- **GRUB_DISTRIBUTOR**: This is usually automatically determined based on the distribution, but you can customize it if necessary.
+
+- **GRUB_CMDLINE_LINUX_DEFAULT**: Adds kernel parameters to the default boot entry. Common parameters include `quiet` (to suppress boot messages) and `splash` (to show a splash screen).
+
+- **GRUB_CMDLINE_LINUX**: This can be used to specify parameters that apply to all boot entries.
+
+### Updating GRUB Configuration
+After making changes to `/etc/default/grub`, you need to regenerate the `grub.cfg` file for the changes to take effect. This is typically done with the following command:
+
+```bash
+sudo update-grub
+```
+
+### Example entries in `/etc/grub.d/`
+The `/etc/grub.d/` directory contains scripts that help generate the GRUB menu entries for installed operating systems. Common scripts include:
+
+- **10_linux**: Generates entries for Linux kernels.
+- **30_os-prober**: Detects other operating systems and generates corresponding entries.
+- **00_header**: Sets up the basic configuration before entries are populated.
+
+When you run `update-grub`, it executes these scripts in order to create the grub.cfg file.
+
+### Customization
+You can further customize GRUB by editing or adding scripts in the `/etc/grub.d/` directory and then regenerating `grub.cfg`. Be careful when modifying these scripts, as incorrect configurations can lead to boot issues.
+
+### Example Custom Entries
+You can also add your own custom entries manually by creating a new script file in `/etc/grub.d/` with a name that starts with a number (e.g., `40_custom`) and following the syntax to define the menu entries.
+
+```bash
+#!/bin/sh
+set -e
+
+cat << EOF
+menuentry "Custom OS" {
+    set root=(hd0,1)
+    linux /vmlinuz-linux root=/dev/sda1
+    initrd /initramfs-linux.img
+}
+EOF
+```
+
+Remember to make the script executable:
+```bash
+sudo chmod +x /etc/grub.d/40_custom
+```
+
+And then run `sudo update-grub` again to include your changes.

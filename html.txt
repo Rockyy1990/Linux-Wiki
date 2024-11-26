@@ -1,0 +1,57 @@
+HTML, was für "Hypertext Markup Language" steht, ist die Standardauszeichnungssprache für das Erstellen von Webseiten. Sie verwendet eine Reihe von Elementen, die durch Tags (Schlüsselwörter in spitzen Klammern) definiert werden. HTML ermöglicht es, strukturelle Elemente einer Webseite zu definieren, wie z.B. Überschriften, Absätze, Links, Bilder und vieles mehr.
+
+Das Grundgerüst einer HTML-Seite besteht aus bestimmten strukturellen Komponenten, die sicherstellen, dass der Browser die Seite korrekt interpretiert. Hier ist ein Beispiel für das grundlegende Gerüst einer HTML-Seite:
+
+ 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titel der Webseite</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Verknüpfung zu einer CSS-Datei -->
+</head>
+<body>
+    <header>
+        <h1>Willkommen auf meiner Webseite</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#home">Startseite</a></li>
+            <li><a href="#about">Über uns</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="home">
+            <h2>Startseite</h2>
+            <p>Dies ist der Inhalt der Startseite.</p>
+        </section>
+        <section id="about">
+            <h2>Über uns</h2>
+            <p>Hier erfahren Sie mehr über uns.</p>
+        </section>
+        <section id="contact">
+            <h2>Kontakt</h2>
+            <p>So können Sie uns erreichen.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Mein Unternehmen</p>
+    </footer>
+</body>
+</html>
+
+Erläuterungen zu den wichtigsten Teilen des Grundgerüsts:
+
+    <!DOCTYPE html>: Dies ist eine Dokumenttypdeklaration, die dem Browser sagt, dass es sich um eine HTML5-Seite handelt.
+
+    <html lang="de">: Das öffnende HTML-Tag leitet den Beginn des HTML-Dokuments ein. Das Attribut lang gibt die Sprache der Seite an (in diesem Fall Deutsch).
+
+    <head>: Der Kopfbereich enthält Metainformationen über das Dokument, wie z.B. den Zeichensatz (<meta charset="UTF-8">), die Viewport-Einstellungen für responsive Designs (<meta name="viewport" content="width=device-width, initial-scale=1.0">) und den Titel der Webseite (<title>).
+
+    <body>: Dieser Bereich enthält den eigentlichen Inhalt der Webseite, der im Browser angezeigt wird. Hier finden sich weitere HTML-Elemente wie Kopfzeilen, Absätze und Links.
+
+    <header>, <nav>, <main>, <section>, <footer>: Dies sind verschiedene semantische HTML5-Elemente, die helfen, die Struktur und den Zweck der verschiedenen Teile der Seite zu definieren.
+
+Mit diesen Grundlagen und dem Beispiel kannst du beginnen, deine eigene Webseite zu erstellen und zu gestalten!
