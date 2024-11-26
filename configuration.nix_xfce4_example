@@ -1,0 +1,80 @@
+{ config, pkgs, ... }:
+
+{
+  # Grundlegende Systemkonfiguration
+  imports =
+    [ 
+      # Hier kannst du andere Module importieren
+    ];
+
+  # System-Optionen
+  boot.loader.grub.device = "/dev/sda"; # Passe dies an dein System an
+  networking.hostName = "nixos-gaming";  # Hostname deines Systems
+  time.timeZone = "Europe/Berlin";       # Zeitzone anpassen
+
+  # Benutzerkonfiguration
+  users.users.yourusername = {
+    isNormalUser   = true;
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" "games" ]; # Berechtigungen
+    password = "yourpassword"; # Setze dein Passwort
+  };
+
+  # Paketverwaltung
+  environment.systemPackages = with pkgs; [
+    steam
+    firefox
+    thunderbird
+    discord
+    ffmpeg
+    lame
+    flac
+    pipewire
+    wireplumber
+    pavucontrol
+    xfce4
+    xfce4-terminal
+    mousepad
+    mesa
+    # Füge hier weitere Pakete hinzu, die du benötigst
+  ];
+
+  # Desktop-Umgebung
+  services.xserver.enable = true;
+  services.xserver.displayManager.lightdm.enable = true; # Verwende LightDM als Display-Manager
+  services.xserver.windowManager.xfce.enable = true;     # XFCE als Fenstermanager aktivieren
+
+  # Audio-Konfiguration
+  sound.enable = true;
+  hardware.pulseaudio.enable = false; # Verwende PipeWire anstelle von PulseAudio
+  hardware.pipewire.enable = true;
+  hardware.pipewire.pulse.enable = true;
+  hardware.pipewire.pulse.defaultSink = "pipewire-pulse"; # Standard-Sink für PipeWire
+
+  # Systemd-Dienste aktivieren
+  systemd.services.wireplumber = {
+    enable = true;
+    wantedBy = [ "multi-user.target" ];
+  };
+
+  # Optimierungen für Gaming
+  services.earlyoom.enable = true; # Frühzeitige OOM-Killer aktivieren
+  services.tlp.enable = true;       # TLP für Energieverwaltung
+  services.tlp.defaultConfig = {
+    # Füge hier deine TLP-Konfiguration hinzu
+  };
+
+  # Kernel-Parameter für Performance
+  boot.kernelParams = [ "quiet" "splash" "noatime" "nobarrier" ];
+
+  # Grafiktreiber für AMD
+  hardware.opengl.enable = true; # OpenGL aktivieren
+  hardware.videoDrivers = [ "amdgpu" ]; # AMD GPU-Treiber
+
+  # Firewall-Konfiguration (optional)
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 80 443 27015 ]; # Steam-Ports hinzufügen
+  networking.firewall.allowedUDPPorts = [ 27000 27015 ]; # Steam-Ports hinzufügen
+
+  # Weitere Konfigurationen
+  # Hier kannst du zusätzliche Optionen hinzufügen
+}
