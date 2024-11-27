@@ -1,4 +1,7 @@
  
+# <file system> <mount point> <type> <options> <dump> <pass>
+UUID=your-uuid-here /mnt/data ext4 defaults,noatime,nodiratime,commit=60,barrier=0,data=writeback 0 2
+
 To maximize performance for ext4 file system, you can consider the following options:
 
     Mount options:
@@ -6,6 +9,7 @@ To maximize performance for ext4 file system, you can consider the following opt
         nodiratime:     Disable updating directory access timestamps, providing further I/O reduction.
         data=writeback  Use writeback mode for data journaling, which improves performance at the cost of potential data loss in case of power failure or system crash.
         barrier=0:      Disable barriers, which can improve performance in some cases but may increase the risk of data corruption in case of power failure or system crash.
+        commit=60:      Sets the interval between disk writes to 60 seconds. This can improve performance but may risk data loss in the event of a crash.
         Example of mounting with these options: mount -o noatime,nodiratime,data=writeback,barrier=0 /dev/sdx /mnt
 
     Allocation policies:
