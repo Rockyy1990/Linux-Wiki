@@ -1,0 +1,118 @@
+Um ein RAID 0 unter Arch Linux für das Root-Dateisystem (`/`) einzurichten, befolgen Sie diese allgemeinen Schritte. Das Setup umfasst das Partitionieren von Datenträgern, das Erstellen des RAID-Arrays und die Installation von Arch Linux auf diesem Array. Beachten Sie, dass alle Daten auf den beteiligten Datenträgern gelöscht werden, also stellen Sie sicher, dass Sie eine Sicherung Ihrer Daten haben.
+
+### Schritt 1: Vorbereitungen
+
+1. **Booten Sie von einem Arch Linux Live-USB.**
+2. **Öffnen Sie ein Terminal.**
+
+### Schritt 2: Partitionieren der Festplatten
+
+Angenommen, Sie haben zwei Festplatten, `/dev/sda` und `/dev/sdb`, die Sie für RAID nutzen möchten.
+
+```bash
+# Partitionieren von /dev/sda
+fdisk /dev/sda
+# Erstellen Sie eine neue Partition, z.B. "n" für eine neue Partition und "p" für primär.
+# Wählen Sie die gesamte verfügbare Größe der Festplatte.
+
+# Machen Sie dasselbe für /dev/sdb
+fdisk /dev/sdb
+```
+
+Beachten Sie, dass die Partitionen die gleiche Größe haben sollten.
+
+### Schritt 3: Erstellen des RAID-Arrays
+
+Installieren Sie das RAID-Tool `mdadm`, wenn es erforderlich ist, und erstellen Sie das RAID-Array:
+
+```bash
+# Installieren von mdadm (falls nicht vorinstalliert)
+pacman -Sy mdadm
+
+# Erstellen des RAID-0 Arrays
+mdadm --create --verbose /dev/md0 --level=0 --raid-devices=2 /dev/sda1 /dev/sdb1
+```
+
+### Schritt 4: Überprüfen des RAID-Status
+
+Überprüfen Sie den Status des RAID-Arrays:
+
+```bash
+cat /proc/mdstat
+mdadm --detail /dev/md0
+```
+
+### Schritt 5: Formatieren des RAID-Arrays
+
+Formatieren Sie das RAID-Array mit einem Dateisystem, zum Beispiel ext4:
+
+```bash
+mkfs.ext4 /dev/md0
+```
+
+### Schritt 6: Einbinden des RAID-Arrays
+
+Jetzt müssen Sie das RAID-Array in das Live-System einhängen:
+
+```bash
+mount /dev/md0 /mnt
+```
+
+### Schritt 7: Arch Linux Installation
+
+Führen Sie nun die Standardinstallation von Arch Linux durch:
+
+```bash
+pacstrap /mnt base linux linux-firmware vim
+genfstab -U /mnt >> /mnt/etc/fstab
+```
+
+### Schritt 8: Konfigurieren des RAID-Arrays
+
+Bevor Sie das System einrichten, müssen Sie die Konfiguration für `mdadm` hinzufügen. Erstellen Sie die nötige `mdadm.conf`:
+
+```bash
+arch-chroot /mnt
+mdadm --detail --export /dev/md0 > /etc/mdadm.conf
+```
+
+Fügen Sie zur Datei `/etc/mdadm.conf` die folgende Zeile hinzu, um sicherzustellen, dass das Array beim Booten erkannt wird:
+
+```bash
+MODULES=(md_mod)
+```
+
+Bearbeiten Sie auch Ihre `/etc/fstab`, um das RAID-Array korrekt anzugeben:
+
+Öffnen Sie `/etc/fstab` und stellen Sie sicher, dass ein Eintrag für Ihr RAID-Array vorhanden ist:
+
+```bash
+/dev/md0 / ext4 defaults,noatime 0 1
+```
+
+### Schritt 9: Fertigstellung der Installation
+
+Schließen Sie die Installation ab:
+
+```bash
+exit
+umount -R /mnt
+reboot
+```
+
+### Schritt 10: RAID-Überwachung
+
+Nach der Installation können Sie das RAID-Array mit `mdadm` überwachen und verwalten:
+
+```bash
+mdadm --detail /dev/md0
+cat /proc/mdstat
+```
+
+### Hinweise
+
+- Bei RAID 0 gibt es kein Redundanz, deshalb sollten Sie unbedingt regelmäßig Backups Ihrer Daten anfertigen. 
+- Je nach Hardware und BIOS/UEFI müssen möglicherweise zusätzliche Einstellungen vorgenommen werden. Prüfen Sie, ob die Festplatten korrekt erkannt werden. 
+- Bei einem RAID 0 kann es sein, dass bei einem Datenverlust auf einer Festplatte alle Daten verloren gehen.
+
+Befolgen Sie diese Schritte sorgfältig und viel Erfolg beim Einrichten Ihres RAID 0!

@@ -1,0 +1,32 @@
+Rsync
+
+rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} / /path/to/backup/folder
+
+Optionen:
+-a: Dies steht für "archive mode". Es ist eine Kombination von Optionen, die sicherstellt, dass alle Dateieigenschaften (wie Berechtigungen, Zeitstempel, symbolische Links usw.) beibehalten werden.
+-A: Beinhaltet die Übertragung von ACLs (Access Control Lists), die zusätzliche Berechtigungen für Dateien und Verzeichnisse definieren.
+-X: Beinhaltet die Übertragung von erweiterten Attributen, die zusätzliche Metadaten für Dateien speichern können.
+-v: Steht für "verbose" und sorgt dafür, dass rsync detaillierte Informationen über den Fortschritt des Kopiervorgangs ausgibt.
+
+--exclude:
+Die --exclude-Option gibt an, welche Verzeichnisse oder Dateien von der Synchronisation ausgeschlossen werden sollen. In diesem Fall werden die folgenden Verzeichnisse ausgeschlossen:
+
+/dev/*: Geräte-Dateien
+/proc/*: Virtuelles Dateisystem für Prozessinformationen
+/sys/*: Virtuelles Dateisystem für Kernel- und Systeminformationen
+/tmp/*: Temporäre Dateien
+/run/*: Laufzeitdaten
+/mnt/*: Eingehängte Dateisysteme
+/media/*: Wechseldatenträger und Medien
+/lost+found: Ein Verzeichnis, das von Dateisystemen zur Wiederherstellung von verlorenen Dateien verwendet wird
+Quell- und Zielverzeichnis:
+/: Das Wurzelverzeichnis des Dateisystems, von dem die Daten kopiert werden.
+/path/to/backup/folder: Das Zielverzeichnis, in das die Daten gesichert werden.
+
+
+Backup wiederherstellen:
+sudo rsync -av /path/to/backup/ /target/directory/
+
+
+Zusammenfassung:
+Der Befehl kopiert also alle Dateien und Verzeichnisse vom Wurzelverzeichnis (/) in das angegebene Backup-Verzeichnis (/path/to/backup/folder), wobei die angegebenen Verzeichnisse ausgeschlossen werden. Dabei werden alle wichtigen Dateieigenschaften, ACLs und erweiterten Attribute beibehalten.

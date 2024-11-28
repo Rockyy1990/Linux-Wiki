@@ -30,8 +30,8 @@ mkdir /mnt/home
 mount /dev/sda3 /mnt/home
 
 # Temporäre Verzeichnisse im tmpfs einrichten
-mkdir -p /mnt/tmp
-mount -t tmpfs tmpfs /mnt/tmp
+# mkdir -p /mnt/tmp
+# mount -t tmpfs tmpfs /mnt/tmp
 
 # Basis Installation
 pacstrap /mnt base base-devel linux-zen linux-firmware nano

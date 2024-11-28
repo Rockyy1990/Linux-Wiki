@@ -1,0 +1,149 @@
+Um ein RAID 1 für die Root-Partition (`/`) unter Arch Linux mit UEFI einzurichten, sind einige Schritte erforderlich. Beachte, dass die folgenden Schritte Datenverlust verursachen können, wenn sie nicht korrekt durchgeführt werden. Sichere daher alle wichtigen Daten, bevor du beginnst. Hier ist eine Schritt-für-Schritt-Anleitung:
+
+### Voraussetzungen
+
+1. **Zwei identische Festplatten**: Für ein RAID 1 benötigst du zwei Festplatten, die mindestens die gleiche Größe haben.
+2. **Arch Linux Live-USB/CD**: Du benötigst ein bootfähiges Medium, um Arch Linux zu installieren.
+3. **Internetverbindung**: Für die Installation und Updates.
+
+### Schritt 1: Booten Sie von dem Live-USB
+
+1. Starte deinen Rechner von dem Arch Linux Live-USB/CD.
+2. Wähle im Boot-Menü die Option zum Booten in das Arch Linux Live-System.
+
+### Schritt 2: Festplatten vorbereiten
+
+1. **Festplattenerkennung**: Stelle sicher, dass die beiden Platten erkannt werden. Nutze den Befehl:
+   ```bash
+   lsblk
+   ```
+   Angenommen, die Platten sind `/dev/sda` und `/dev/sdb`.
+
+2. **Partitionierung**: Verwende `gdisk` oder `parted`, um die Platten zu partitionieren. Stelle sicher, dass du auf beiden Platten die gleiche Partitionierung vornimmst. Hier ist ein Beispiel mit `gdisk`:
+
+   ```bash
+   gdisk /dev/sda
+   ```
+   
+   Erstelle eine EFI-System-Partition (ESP) und eine Root-Partition (`/`):
+   - ESP: 200 MB, Typ: EFI System
+   - Root-Partition: Rest des Speicherplatzes, Typ: Linux Filesystem
+
+   Wiederhole die Schritte für `/dev/sdb`.
+
+### Schritt 3: RAID 1 einrichten
+
+Verwende `mdadm` zur Einrichtung des RAID-Arrays:
+
+1. Installiere `mdadm`, wenn es nicht schon verfügbar ist:
+   ```bash
+   pacman -Sy mdadm
+   ```
+
+2. Erstelle das RAID 1 für die Root-Partition:
+   ```bash
+   mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sdaX /dev/sdbX
+   ```
+   Ersetze `X` durch die entsprechende Partition für die Root-Partition.
+
+3. Überprüfe den RAID-Status:
+   ```bash
+   cat /proc/mdstat
+   ```
+
+### Schritt 4: Datei-System erstellen und RAID einhängen
+
+1. Erstelle ein Dateisystem auf dem RAID-Array:
+   ```bash
+   mkfs.ext4 /dev/md0
+   ```
+
+2. Mounte es temporär:
+   ```bash
+   mount /dev/md0 /mnt
+   ```
+
+3. Erstelle die EFI-System-Partition und mounte sie:
+   ```bash
+   mkfs.fat -F32 /dev/sdaY    # Ersetze Y mit der ESP-Partition
+   mkdir /mnt/boot
+   mount /dev/sdaY /mnt/boot
+   ```
+
+### Schritt 5: Systeminstallation
+
+1. Installiere das basale Arch Linux System mit:
+   ```bash
+   pacstrap /mnt base linux linux-firmware mdadm
+   ```
+
+2. Generiere die `fstab` Datei:
+   ```bash
+   genfstab -U /mnt >> /mnt/etc/fstab
+   ```
+
+### Schritt 6: Konfiguration
+
+1. Wechsle ins neue System:
+   ```bash
+   arch-chroot /mnt
+   ```
+
+2. Konfiguriere das System (Locale, Zeit, Hostname, etc.).
+
+3. Füge `mdadm` zur `initramfs` hinzu, um sicherzustellen, dass das RAID beim Booten erkennt wird, indem du die Datei `/etc/mdadm.conf` erstellst:
+   ```bash
+   mdadm --detail --scan >> /etc/mdadm.conf
+   ```
+
+4. Modifiziere `mkinitcpio.conf`:
+   ```bash
+   nano /etc/mkinitcpio.conf
+   ```
+   Füge `mdadm` in die `MODULES`-Zeile hinzu:
+   ```plaintext
+   MODULES=(... mdadm)
+   ```
+
+5. Regeneriere die `initramfs`:
+   ```bash
+   mkinitcpio -P
+   ```
+
+### Schritt 7: Bootloader installieren
+
+Installiere einen Bootloader wie `grub`:
+
+1. Installiere GRUB:
+   ```bash
+   pacman -S grub efibootmgr
+   ```
+
+2. Installiere GRUB auf der EFI System Partition:
+   ```bash
+   grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+   ```
+
+3. Generiere die GRUB-Konfiguration:
+   ```bash
+   grub-mkconfig -o /boot/grub/grub.cfg
+   ```
+
+### Schritt 8: Abschluss
+
+1. Beende die Chroot-Umgebung:
+   ```bash
+   exit
+   ```
+
+2. Unmount alle Partitionen:
+   ```bash
+   umount -R /mnt
+   ```
+
+3. Starte dein System neu:
+   ```bash
+   reboot
+   ```
+
+Dein System sollte nun mit RAID 1 für die Root-Partition eingerichtet sein. Stelle sicher, dass du bei jedem Boot überprüfen kannst, ob das RAID korrekt funktioniert, indem du den Status mit `cat /proc/mdstat` überprüfst.

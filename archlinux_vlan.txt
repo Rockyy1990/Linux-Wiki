@@ -1,0 +1,91 @@
+Um ein VLAN (Virtual Local Area Network) unter Arch Linux einzurichten, kannst du die `ip`-Befehlszeile verwenden, die Teil der `iproute2`-Tools ist. Hier sind die Schritte, um ein VLAN zu erstellen und zu konfigurieren:
+
+### Voraussetzungen
+
+Stelle sicher, dass die `iproute2`-Pakete installiert sind. Diese sollten standardmäßig in Arch Linux enthalten sein.
+
+### 1. Prüfen der Netzwerkgeräte
+
+Bevor du ein VLAN einrichtest, kannst du deine Netzwerkgeräte mit folgendem Befehl überprüfen:
+
+```bash
+ip link show
+```
+
+Notiere dir den Namen des Netzwerkinterfaces, das du für das VLAN verwenden möchtest (z. B. `eth0` oder `enp0s3`).
+
+### 2. VLAN einrichten
+
+Um ein VLAN einzurichten, benutze den Befehl `ip link add`. Der folgende Befehl zeigt, wie man ein VLAN mit der ID 10 auf dem Interface `eth0` erstellt:
+
+```bash
+sudo ip link add link eth0 name eth0.10 type vlan id 10
+```
+
+### 3. VLAN aktivieren
+
+Aktiviere das VLAN-Interface mit dem folgenden Befehl:
+
+```bash
+sudo ip link set dev eth0.10 up
+```
+
+### 4. IP-Adresse zuweisen
+
+Jetzt kannst du eine IP-Adresse zuweisen. Das folgende Beispiel verwendet `dhclient`, um eine IP-Adresse über DHCP zu beziehen:
+
+```bash
+sudo dhclient eth0.10
+```
+
+Wenn du eine statische IP-Adresse verwenden möchtest, kannst du dies so tun:
+
+```bash
+sudo ip addr add 192.168.1.10/24 dev eth0.10
+```
+
+### 5. Konfiguration persistent machen
+
+Um sicherzustellen, dass die VLAN-Konfiguration nach einem Neustart weiterhin besteht, kannst du die Konfiguration in eine Netzwerkverwaltungsanwendung wie `systemd-networkd`, `netctl` oder `NetworkManager` integrieren. Hier ein Beispiel für `systemd-networkd`:
+
+1. **Aktiviere systemd-networkd:**
+   
+   ```bash
+   sudo systemctl enable systemd-networkd
+   sudo systemctl start systemd-networkd
+   ```
+
+2. **Erstelle eine neue Netzwerkdatei für das VLAN:**
+
+   Erstelle die Datei `/etc/systemd/network/10-eth0.10.network` mit folgendem Inhalt:
+
+   ```
+   [Match]
+   Name=eth0.10
+
+   [Network]
+   Address=192.168.1.10/24
+   DHCP=yes
+   ```
+
+3. **Erstelle die VLAN-Einheit:**
+
+   Erstelle die Datei `/etc/systemd/network/10-eth0.network`:
+
+   ```
+   [Match]
+   Name=eth0
+
+   [Network]
+   VLAN=yes
+   ```
+
+### 6. Netzwerksysteme neu starten
+
+Starte danach `systemd-networkd` neu:
+
+```bash
+sudo systemctl restart systemd-networkd
+```
+
+Diese Schritte sollten dir helfen, ein VLAN auf einem Arch Linux-System einzurichten. Achte darauf, die Namen und IP-Adressen entsprechend deiner speziellen Anforderungen anzupassen.

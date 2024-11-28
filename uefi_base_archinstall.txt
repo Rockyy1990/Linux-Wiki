@@ -1,0 +1,116 @@
+Um eine eigene UEFI-Arch Linux-Installation zu konfigurieren, sind mehrere Schritte erforderlich. Hier ist eine grundlegende Anleitung, die dir hilft, deine UEFI-Arch Linux-Installation zu erstellen:
+
+### Voraussetzungen
+- **Arch Linux Live-USB:** Du benötigst ein bootfähiges Arch Linux USB-Laufwerk.
+- **Ein Zielsystem, das UEFI unterstützt.**
+
+### Installationsschritte
+
+1. **Booten vom Live-USB:**
+   Starte dein System von der erstellten Arch Linux Live-USB.
+
+2. **Netzwerkverbindung herstellen:**
+   Verbinde dich mit dem Internet, falls du dies nicht automatisch kannst.
+   ```bash
+   iwctl  # Um die Netzwerkeinstellungen über die Interaktive Konsole zu konfigurieren.
+   ```
+
+3. **Festplattenpartitionierung:**
+   Teile die Festplatte für UEFI, erstelle mindestens zwei Partitionen: eine für das EFI-System und eine für die Root-Partition.
+   Verwende `fdisk`, `gdisk` oder `parted`, um die Partitionen zu erstellen.
+   ```bash
+   cfdisk /dev/sdX  # Ersetze sdX durch dein Datenträgergerät.
+   ```
+   - Erstelle eine FAT32-Partition (EFI) von ca. 300-500MB.
+   - Erstelle eine ext4-Partition für das Root-Dateisystem.
+
+4. **Formatieren der Partitionen:**
+   ```bash
+   mkfs.fat -F32 /dev/sdX1  # Formatiere die EFI-Partition.
+   mkfs.ext4 /dev/sdX2      # Formatiere die Root-Partition.
+   ```
+
+5. **Einbinden der Partitionen:**
+   Montiere die Root-Partition, erstelle und montiere den EFI-Ordner.
+   ```bash
+   mount /dev/sdX2 /mnt              # Montiere die Root-Partition.
+   mkdir /mnt/boot                    # Erstelle das Boot-Verzeichnis.
+   mount /dev/sdX1 /mnt/boot         # Montiere die EFI-Partition.
+   ```
+
+6. **Basisinstallation:**
+   Installiere das Basis-System und die notwendigen Pakete.
+   ```bash
+   pacstrap /mnt base linux linux-firmware vim
+   ```
+
+7. **Fstab erstellen:**
+   Generiere die `fstab`-Datei.
+   ```bash
+   genfstab -U /mnt >> /mnt/etc/fstab
+   ```
+
+8. **In das neue System chrooten:**
+   ```bash
+   arch-chroot /mnt
+   ```
+
+9. **Zeitzone und Locale einstellen:**
+   - Setze die Zeitzone:
+   ```bash
+   ln -sf /usr/share/zoneinfo/Region/Stadt /etc/localtime
+   hwclock --systohc
+   ```
+   - Aktivieren der Locale. Bearbeite `/etc/locale.gen` und uncomment die gewünschte Locale. Dann führe aus:
+   ```bash
+   locale-gen
+   echo "LANG=de_DE.UTF-8" > /etc/locale.conf
+   ```
+
+10. **Hostname und Hosts konfigurieren:**
+    ```bash
+    echo 'meinHostname' > /etc/hostname
+    ```
+    Erstelle die `/etc/hosts`-Datei mit folgendem Inhalt:
+    ```plaintext
+    127.0.0.1    localhost
+    ::1          localhost
+    127.0.1.1    meinHostname.localdomain meinHostname
+    ```
+
+11. **Initramfs erstellen:**
+    Dies geschieht normalerweise automatisch bei der Installation, kann aber manuell durchgeführt werden:
+    ```bash
+    mkinitcpio -P
+    ```
+
+12. **Bootloader installieren:**
+    Installiere den GRUB-Bootloader und konfiguriere ihn für UEFI:
+    ```bash
+    pacman -S grub efibootmgr
+    grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+    grub-mkconfig -o /boot/grub/grub.cfg
+    ```
+
+13. **Root-Passwort setzen:**
+    Setze das Passwort für den Root-Benutzer:
+    ```bash
+    passwd
+    ```
+
+14. **System verlassen und neu starten:**
+    Verlasse den Chroot und boote das System neu.
+    ```bash
+    exit
+    umount -R /mnt
+    reboot
+    ```
+
+### Nach der Installation
+Jetzt solltest du in der Lage sein, in dein neues Arch Linux UEFI-System zu booten. Denk daran, die zusätzlichen Softwarepakete und Konfigurationen nach Bedarf zu installieren. Für Programme wie `networkmanager`, `sudo`, und Benutzerverwaltung musst du zusätzliche Schritte unternehmen.
+
+### Wichtige Hinweise
+- Halte die offiziellen Arch Wiki-Seiten zur Installation und Konfiguration stets bereit, da sie viele zusätzliche Informationen, insbesondere zur Fehlersuche, bieten. 
+- Vergewissere dich, dass dein System im UEFI-Modus und nicht im Legacy-BIOS-Modus bootet.
+
+Viel Erfolg bei deiner Arch Linux Installation!
