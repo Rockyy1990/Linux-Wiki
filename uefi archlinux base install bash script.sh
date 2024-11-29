@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Skript für die Installation von Arch Linux mit UEFI, ext4 und xfs /home Partition.
-# Installiert werden der Linx-Zen Kernel mit Firefox, Thunderbird, Vlc sowie andere nützliche Programme und Grafiktreiber.
+# Installiert werden der Linux-Zen Kernel mit Firefox, Thunderbird, Vlc sowie andere nützliche Programme und Grafiktreiber.
 # Angelegt werden ein User namens lxadmin samt wheel und video Gruppe.
 
 # Setze die Variablen
@@ -12,8 +12,8 @@ PASSWORD="dein_passwort" # Ändere dies zu einem sicheren Passwort
 # Partitionierung
 parted /dev/sda mklabel gpt
 parted /dev/sda mkpart primary fat32 1MiB 512MiB
-parted /dev/sda mkpart primary ext4 512MiB 20GiB
-parted /dev/sda mkpart primary xfs 20GiB 100%
+parted /dev/sda mkpart primary ext4 512MiB 36GiB
+parted /dev/sda mkpart primary xfs 36GiB 100%
 
 # UEFI Partition formatieren
 mkfs.fat -F32 /dev/sda1
@@ -34,7 +34,7 @@ mount /dev/sda3 /mnt/home
 # mount -t tmpfs tmpfs /mnt/tmp
 
 # Basis Installation
-pacstrap /mnt base base-devel linux-zen linux-firmware nano
+pacstrap /mnt base base-devel linux-zen linux-firmware efibootmgr nano
 
 # Fstab generieren
 genfstab -U /mnt >> /mnt/etc/fstab

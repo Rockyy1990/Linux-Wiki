@@ -1,0 +1,47 @@
+„End of Line“ (EOL) bezieht sich auf die Zeichen oder Zeichenfolgen, die in Textdateien verwendet werden, um das Ende einer Zeile zu kennzeichnen. Unterschiedliche Betriebssysteme verwenden unterschiedliche EOL-Zeichen, was bei der Verarbeitung von Textdateien zu Komplikationen führen kann. 
+Hier sind die gängigen EOL-Zeichen für Linux, Windows und macOS:
+
+1. **Linux**:
+   - In Linux wird EOL mit einem einzelnen Zeichen, dem Zeilenumbruch (newline), dargestellt, das ASCII-Zeichen „LF“ (Line Feed) ist. 
+Das entsprechende Zeichen hat den Wert `\n`.
+   - Beispiel für EOL in Linux: 
+     ```
+     Textzeile 1
+
+     Textzeile 2
+
+     ```
+
+2. **Windows**:
+   - Windows verwendet eine Kombination aus zwei Zeichen, um EOL darzustellen: das Carriage Return-Zeichen (CR), gefolgt von dem Line Feed-Zeichen (LF). 
+Dies wird oft als CRLF bezeichnet. Die ASCII-Zeichen sind `\r
+`.
+   - Beispiel für EOL in Windows: 
+     ```
+     Textzeile 1\r
+
+     Textzeile 2\r
+
+     ```
+
+3. **macOS**:
+   - Vor der Einführung von OS X (macOS) verwendete das klassische Mac-Betriebssystem (bis Version 9) nur das Carriage Return-Zeichen (CR) als EOL, also `\r`.
+   - Ab OS X (macOS) folgt das System dem Unix-Prinzip und verwendet ebenfalls LF (`\n`) wie Linux.
+   - Beispiel für EOL im klassischen Mac: 
+     ```
+     Textzeile 1\r
+     Textzeile 2\r
+     ```
+   - Beispiel für EOL in modernem macOS:
+     ```
+     Textzeile 1
+
+     Textzeile 2
+
+     ```
+
+### Probleme durch unterschiedliche EOL-Zeichensätze
+Die unterschiedlichen EOL-Zeichensätze können zu Problemen beim Austausch von Textdateien zwischen verschiedenen Betriebssystemen führen. Beispielsweise kann eine Datei, die unter Windows bearbeitet wurde, in einem UNIX-basierten System (wie Linux oder macOS) möglicherweise Zeilenumbrüche nicht korrekt darstellen, was zu Anzeigeproblemen oder unerwartetem Verhalten führen kann.
+
+### Umgang mit EOL
+Programmierer und Entwickler verwenden oft Tools oder Einstellungen in Texteditoren, um sicherzustellen, dass die richtigen EOL-Zeichen verwendet werden. Es gibt auch Konvertierungswerkzeuge, die helfen, Textdateien zwischen den verschiedenen Formaten (CRLF und LF) umzuwandeln, um solche Probleme zu beheben.
