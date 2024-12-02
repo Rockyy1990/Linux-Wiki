@@ -1,0 +1,72 @@
+chmod (change mode) ist ein Befehl in Unix-ähnlichen Betriebssystemen, der verwendet wird, um die Zugriffsrechte von Dateien und Verzeichnissen zu ändern. Die Zugriffsrechte werden in drei Kategorien unterteilt:
+
+    Besitzer (User): Der Benutzer, der die Datei oder das Verzeichnis erstellt hat.
+    Gruppe (Group): Eine Gruppe von Benutzern, die bestimmte Berechtigungen für die Datei oder das Verzeichnis haben.
+    Andere (Others): Alle anderen Benutzer im System, die nicht der Besitzer oder Mitglied der Gruppe sind.
+
+Die Berechtigungen werden in drei Hauptkategorien unterteilt:
+
+    Lesen (Read, r): Erlaubt das Lesen der Datei oder das Auflisten des Inhalts eines Verzeichnisses.
+    Schreiben (Write, w): Erlaubt das Ändern der Datei oder das Hinzufügen/Entfernen von Dateien in einem Verzeichnis.
+    Ausführen (Execute, x): Erlaubt das Ausführen einer Datei als Programm oder das Betreten eines Verzeichnisses.
+
+Verwendung von chmod
+
+Die Syntax für den chmod-Befehl ist:
+
+ 
+chmod [Optionen] Modus Datei
+
+Der Modus kann entweder in numerischer Form (Oktal) oder in symbolischer Form angegeben werden.
+Oktale Notation
+
+In der oktalen Notation entsprechen die Berechtigungen den folgenden Werten:
+
+    0: Keine Berechtigung
+    1: Ausführen
+    2: Schreiben
+    3: Schreiben + Ausführen
+    4: Lesen
+    5: Lesen + Ausführen
+    6: Lesen + Schreiben
+    7: Lesen + Schreiben + Ausführen
+
+Die Berechtigungen werden in der Reihenfolge U-G-O (User-Group-Others) angegeben.
+
+Beispiele
+
+Beispiel 1: Setzen von Berechtigungen auf 755
+
+ chmod 755 datei.txt
+
+In diesem Beispiel wird der Datei datei.txt die Berechtigung rwxr-xr-x (755) zugewiesen. Das bedeutet:
+
+    Der Besitzer hat Lese-, Schreib- und Ausführungsrechte (7),
+    die Gruppe hat Lese- und Ausführungsrechte (5),
+    andere Benutzer haben ebenfalls Lese- und Ausführungsrechte (5).
+
+Beispiel 2: Setzen von Berechtigungen auf 644
+
+ chmod 644 datei.txt
+
+Hier wird der Datei datei.txt die Berechtigung rw-r--r-- (644) zugewiesen. Das bedeutet:
+
+    Der Besitzer hat Lese- und Schreibrechte (6),
+    die Gruppe hat nur Leserechte (4),
+    andere Benutzer haben ebenfalls nur Leserechte (4).
+
+Beispiel 3: Hinzufügen von Ausführungsrechten für den Besitzer
+
+ chmod u+x script.sh
+
+In diesem Beispiel wird dem Benutzer (Besitzer) der Datei script.sh das Ausführungsrecht hinzugefügt.
+ Wenn die ursprünglichen Berechtigungen rw-r--r-- waren, werden sie zu rwxr--r--.
+
+Beispiel 4: Entfernen von Schreibrechten für andere
+
+ chmod o-w datei.txt
+
+Hier wird das Schreibrecht für andere Benutzer von der Datei datei.txt entfernt. Wenn die ursprünglichen Berechtigungen rw-r--r-- waren, werden sie zu rw-r--r-- (keine Änderung, da andere keine Schreibrechte hatten). Wenn sie dagegen rw-rw-rw- waren, ändern sie sich zu rw-r--r--.
+Fazit
+
+Der chmod-Befehl ist ein mächtiges Werkzeug zur Verwaltung von Dateiberechtigungen in Unix-ähnlichen Systemen. Durch das Verständnis der verschiedenen Berechtigungen und deren Kombinationen können Benutzer sicherstellen, dass ihre Dateien und Verzeichnisse vor unbefugtem Zugriff geschützt sind.

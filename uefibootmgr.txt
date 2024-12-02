@@ -1,0 +1,62 @@
+uefibootmgr ist ein Kommandozeilenwerkzeug, das auf Linux-basierten Systemen verwendet wird, um den UEFI-Bootmanager zu verwalten.
+UEFI (Unified Extensible Firmware Interface) ist die moderne Firmware-Schnittstelle, die das BIOS in vielen Computern ersetzt hat. 
+uefibootmgr ermöglicht es Benutzern, Boot-Optionen zu erstellen, zu bearbeiten und zu löschen, sowie die Boot-Reihenfolge zu ändern.
+
+Funktionen von uefibootmgr
+
+Hier sind die wichtigsten Funktionen und Optionen von uefibootmgr:
+
+    Auflisten von Boot-Optionen:
+        Mit dem Befehl uefibootmgr ohne Argumente können alle aktuellen Boot-Optionen angezeigt werden. Dies zeigt die Boot-Reihenfolge und die verfügbaren Boot-Optionen an.
+        Beispiel:
+
+         
+        uefibootmgr
+
+    Ändern der Boot-Reihenfolge:
+        Mit der Option -o oder --bootorder kann die Reihenfolge der Boot-Optionen geändert werden. 
+        Dies ist nützlich, wenn Sie angeben möchten, welches Betriebssystem oder welcher Boot-Loader zuerst geladen werden soll.
+        Beispiel:
+
+         
+        uefibootmgr -o 0002,0001,0000
+
+    Hinzufügen einer neuen Boot-Option:
+        Mit der Option -c oder --create können Sie eine neue Boot-Option erstellen. Hierbei müssen Sie den Boot-Loader-Pfad und andere erforderliche Parameter angeben.
+        Beispiel:
+
+         
+        uefibootmgr -c -d /dev/sda -p 1 -L "MeinLinux" -l "\EFI\MeinLinux\grubx64.efi"
+
+    Löschen einer Boot-Option:
+        Mit -B oder --delete können Sie eine Boot-Option löschen.
+        Beispiel:
+
+         
+        uefibootmgr -B -b 0001
+
+    Ändern von Boot-Optionen:
+        Mit -e oder --edit können Sie eine existierende Boot-Option bearbeiten. Hier können Sie den Namen oder den Boot-Pfad ändern.
+        Beispiel:
+
+         
+        uefibootmgr -e 0001 -L "NeuerName"
+
+    Anzeigen von Boot-Optionen in einer bestimmten Sprache:
+        Mit der Option -A oder --attributes können Attribute für Boot-Optionen angezeigt werden, z.B. ob die Option aktiv oder inaktiv ist.
+
+    Sichern und Wiederherstellen von Boot-Optionen:
+        uefibootmgr selbst bietet keine eingebaute Funktion zum Sichern und Wiederherstellen von Boot-Optionen, aber Sie können die Ausgabe des Befehls zur Sicherung verwenden, um die derzeitigen Einstellungen zu speichern.
+
+
+Wichtige Hinweise
+
+Root-Rechte: Für die meisten Funktionen von uefibootmgr sind Root-Rechte erforderlich. 
+Daher sollten Sie den Befehl mit sudo ausführen, wenn Sie nicht als Root-Benutzer angemeldet sind.
+    
+Vorsicht bei Änderungen: Änderungen an den Boot-Optionen können dazu führen, dass das System nicht mehr bootet, wenn Sie falsche Einstellungen vornehmen. Es ist ratsam, vor größeren Änderungen eine Sicherung Ihrer aktuellen Boot-Optionen zu erstellen.
+
+
+Fazit
+
+uefibootmgr ist ein mächtiges Tool zur Verwaltung von UEFI-Boot-Optionen unter Linux. Es ermöglicht eine präzise Steuerung darüber, wie und in welcher Reihenfolge Betriebssysteme und Boot-Loader geladen werden. Die Verwendung erfordert jedoch Vorsicht und ein gewisses Verständnis der UEFI-Funktionalität.

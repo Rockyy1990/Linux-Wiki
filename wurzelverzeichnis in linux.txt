@@ -1,4 +1,5 @@
 Das Wurzelverzeichnis in Linux, auch als Root-Verzeichnis bezeichnet, ist das oberste Verzeichnis in der hierarchischen Dateistruktur des Betriebssystems. Es wird durch den Schrägstrich (/) dargestellt und bildet den Ausgangspunkt für alle anderen Verzeichnisse und Dateien im System. Hier sind einige grundlegende Punkte, die das Wurzelverzeichnis und seine Bedeutung in Linux erläutern:
+
 Struktur und Hierarchie
 
     Hierarchische Struktur: Linux verwendet eine baumartige Struktur, bei der das Wurzelverzeichnis die Wurzel des Baumes ist. Alle anderen Verzeichnisse sind Unterverzeichnisse des Wurzelverzeichnisses. Zum Beispiel befindet sich das Verzeichnis /home unter dem Wurzelverzeichnis /, und das Verzeichnis /home/user ist ein Unterverzeichnis von /home.
@@ -19,12 +20,16 @@ Struktur und Hierarchie
 
 Zugriffsrechte
 
-    Root-Benutzer: Der Benutzer mit dem Namen „root“ hat vollständigen Zugriff auf alle Dateien und Verzeichnisse im Wurzelverzeichnis. Nur der Root-Benutzer kann bestimmte Systemoperationen und -änderungen durchführen.
-    Berechtigungen: Neben dem Root-Benutzer haben Dateien und Verzeichnisse spezielle Berechtigungen, die regeln, welcher Benutzer auf sie zugreifen, sie lesen, schreiben oder ausführen kann.
+    Root-Benutzer: Der Benutzer mit dem Namen „root“ hat vollständigen Zugriff auf alle Dateien und Verzeichnisse im Wurzelverzeichnis. 
+    Nur der Root-Benutzer kann bestimmte Systemoperationen und -änderungen durchführen.
+    
+    Berechtigungen: 
+    Neben dem Root-Benutzer haben Dateien und Verzeichnisse spezielle Berechtigungen, die regeln, welcher Benutzer auf sie zugreifen, sie lesen, schreiben oder ausführen kann.
 
 Wichtige Konzepte
 
-    Mount-Punkte: In Linux können andere Dateisysteme in den Baum eingehängt werden. Zum Beispiel könnte ein externes Laufwerk unter dem Verzeichnis /mnt oder /media eingehängt werden. Dies bedeutet, dass der Inhalt des anderen Dateisystems innerhalb der hierarchischen Struktur zugänglich ist.
+    Mount-Punkte: In Linux können andere Dateisysteme in den Baum eingehängt werden. 
+Zum Beispiel könnte ein externes Laufwerk unter dem Verzeichnis /mnt oder /media eingehängt werden. Dies bedeutet, dass der Inhalt des anderen Dateisystems innerhalb der hierarchischen Struktur zugänglich ist.
 
     Dateisysteme: Das Wurzelverzeichnis ist der Einstiegspunkt für alle Dateisysteme im Linux-Betriebssystem. Verschiedene Dateisysteme (z. B. ext4, xfs) können verwendet werden, aber sie werden alle in diese hierarchische Struktur integriert.
 

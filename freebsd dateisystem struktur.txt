@@ -1,0 +1,23 @@
+Der Verzeichnisaufbau von FreeBSD ist hierarchisch und folgt weitgehend den Standards des Unix-Betriebssystems.
+ Hier ist eine Übersicht über die wichtigsten Verzeichnisse im FreeBSD-Dateisystem:
+
+    /: Das Wurzelverzeichnis des Dateisystems.
+    /bin: Enthält essentielle Benutzerbefehle, die für die Systemadministration und den Betrieb notwendig sind.
+    /boot: Beinhaltet die Bootloader-Dateien, den Kernel und andere Dateien, die zum Starten des Systems benötigt werden.
+    /dev: Stellt Geräte-Dateien bereit, die den Zugriff auf Hardwarekomponenten ermöglichen.
+    /etc: Beinhaltet Systemkonfigurationsdateien.
+    /home: Das Verzeichnis für die Benutzerverzeichnisse. Jeder Benutzer hat hier ein eigenes Unterverzeichnis.
+    /lib: Enthält die systemweiten Shared Libraries, die von Programmen benötigt werden.
+    /media: Ein Punkt für das Einhängen von Wechseldatenträgern.
+    /mnt: Ein temporäres Verzeichnis, um Dateisysteme einzuhängen.
+    /root: Das Home-Verzeichnis des Superusers (root).
+    /sbin: Enthält essentielle Systembefehle, die normalerweise nur von Administratoren verwendet werden.
+    /usr: Ein Verzeichnis, das viele Benutzeranwendungen und -bibliotheken enthält. Es ist oft in verschiedene Unterverzeichnisse unterteilt:
+        /usr/bin: Nicht essentielle Benutzerbefehle.
+        /usr/lib: Bibliotheken für die Benutzeranwendungen.
+        /usr/local: Für lokal installierte Software und Pakete.
+        /usr/src: Quellcode für das Betriebssystem und andere Software.
+    /var: Beinhaltet variable Daten wie Log-Dateien, Spool-Dateien und temporäre Dateien.
+
+Diese Struktur unterstützt die Organisation von Dateien und Programmen und erleichtert die Verwaltung des Systems. 
+FreeBSD folgt dabei den Prinzipien von Unix, was eine hohe Flexibilität und Erweiterbarkeit ermöglicht.

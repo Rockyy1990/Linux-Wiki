@@ -27,7 +27,7 @@ Die genaue Syntax und die verfügbaren Optionen können je nach Dateisystemtyp v
 Hier ein Beispiel, wie man ein ext4-Dateisystem auf einer Partition formatiert:
 
 ```bash
-mkfs.ext4 -L meinlabel /dev/sdX1
+ mkfs.ext4 -L meinlabel /dev/sdX1
 ```
 
 Achten Sie darauf, alle wichtigen Daten zu sichern, bevor Sie den Befehl `mkfs` ausführen, da er alle vorhandenen Daten auf der angegebenen Partition löscht.
