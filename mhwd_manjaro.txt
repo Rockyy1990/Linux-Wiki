@@ -1,0 +1,31 @@
+mhwd (Manjaro Hardware Detection) ist ein Tool, das in Manjaro Linux verwendet wird, um Hardware-Treiber zu verwalten. Hier sind einige der häufigsten Befehle und deren Beschreibungen:
+
+    mhwd -l
+        Beschreibung: Listet alle verfügbaren Treiber auf, die für die Hardware des Systems geeignet sind.
+
+    mhwd -a [option]
+        Beschreibung: Automatische Installation von Treibern. Die Optionen können pci (für PCI-Geräte) oder usb (für USB-Geräte) sein. Beispiel:     mhwd -a pci nonfree 0300 installiert proprietäre Treiber für Grafikkarten.
+mhwd -a pci free 0300 installiert die Treiber für amd oder intel Grafikkarten.
+
+    mhwd -i [name]
+        Beschreibung: Installiert den angegebenen Treiber. Beispiel: mhwd -i video-nvidia installiert den NVIDIA-Grafiktreiber.
+
+    mhwd -r [name]
+        Beschreibung: Entfernt den angegebenen Treiber. Beispiel: mhwd -r video-nvidia entfernt den NVIDIA-Grafiktreiber.
+
+    mhwd -q
+        Beschreibung: Gibt eine kurze Ausgabe zurück, die nur die installierten Treiber anzeigt.
+
+    mhwd -v
+        Beschreibung: Aktiviert den verbose Modus, der detailliertere Informationen über die Vorgänge von mhwd ausgibt.
+
+    mhwd -f
+        Beschreibung: Erzwingt die Installation eines Treibers, auch wenn bereits ein anderer Treiber installiert ist.
+
+    mhwd -D
+        Beschreibung: Zeigt die installierten Treiber an und gibt an, welche Treiber derzeit aktiv sind.
+
+    mhwd -h
+        Beschreibung: Zeigt die Hilfe und eine Liste aller verfügbaren Optionen und Befehle an.
+
+Diese Befehle sind nützlich, um die Hardwareerkennung und -verwaltung in Manjaro Linux zu steuern. Es ist wichtig, die richtigen Treiber für die jeweilige Hardware zu wählen, um die bestmögliche Leistung und Stabilität zu gewährleisten.

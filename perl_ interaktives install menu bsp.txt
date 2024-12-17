@@ -1,0 +1,117 @@
+Um das Skript so anzupassen, dass mehrere Pakete pro Auswahl installiert werden können, müssen wir die Logik ändern, um die Pakete, die in der Auswahl enthalten sind, korrekt zu verarbeiten. Derzeit wird nur das erste Paket aus der Auswahl installiert, wenn der Benutzer eine Zahl eingibt, die mehrere Pakete enthält.
+
+Hier ist die angepasste Version des Skripts, die es ermöglicht, mehrere Pakete pro Auswahl zu installieren:
+
+perl
+
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+# Define a list of programs to install
+
+my %programs = (
+
+    '1' => 'vim vlc firefox',
+    '2' => 'git',
+    '3' => 'htop',
+    '4' => 'curl',
+    '5' => 'wget',
+    '6' => 'exit',
+
+);
+
+
+# Function to display the menu
+
+sub display_menu {
+
+    print "Select programs to install (comma-separated numbers):\n";
+
+    foreach my $key (sort keys %programs) {
+
+        print "$key. $programs{$key}\n";
+
+    }
+
+}
+
+
+# Main loop
+
+while (1) {
+
+    display_menu();
+    print "Enter your choice: ";
+    chomp(my $choice = <STDIN>);
+
+
+    if ($choice eq '6') {
+
+        print "Exiting...\n";
+
+        last;
+
+    }
+
+
+    my @choices = split /,/, $choice;
+    my @packages_to_install;
+
+ foreach my $ch (@choices) {
+  chomp($ch);
+
+        if (exists $programs{$ch}) {
+
+            # Split the selected program string into individual packages
+
+            my @packages = split / /, $programs{$ch};
+
+            push @packages_to_install, @packages;  # Add all packages to the list
+
+        } else {
+
+            print "Invalid choice: $ch. Please try again.\n";
+
+        }
+
+    }
+
+
+    if (@packages_to_install) {
+
+        my $packages = join(' ', @packages_to_install);
+
+        print "Installing: $packages...\n";
+
+        system("sudo pacman -S --noconfirm $packages");
+
+        if ($? == 0) {
+
+            print "Packages installed successfully!\n";
+
+        } else {
+
+            print "Failed to install packages. Please check the error message above.\n";
+
+        }
+
+    }
+
+}
+
+
+print "Thank you for using the installer!\n";
+
+
+Änderungen im Skript:
+
+    Pakete aufteilen: 
+   Wenn der Benutzer eine Auswahl trifft, die mehrere Pakete enthält (z. B. Auswahl 1), wird die Liste der Pakete in @packages aufgeteilt und 
+   dann in die @packages_to_install-Liste eingefügt.
+   
+   Installation: 
+   Alle ausgewählten Pakete werden in einem einzigen Befehl installiert.
+
+Mit dieser Anpassung kann der Benutzer mehrere Pakete aus verschiedenen Auswahlmöglichkeiten auswählen, und das Skript installiert sie alle in einem Rutsch.

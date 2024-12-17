@@ -1,0 +1,30 @@
+# Creating a Custom Ubuntu Iso
+
+sudo apt-get install debootstrap squashfs-tools xorriso
+
+mkdir $HOME/live-ubuntu-from-scratch
+
+sudo debootstrap --arch=amd64 --variant=minbase focal $HOME/live-ubuntu-from-scratch/chroot http://us.archive.ubuntu.com/ubuntu/
+
+sudo mount --bind /dev $HOME/live-ubuntu-from-scratch/chroot/dev
+sudo mount --bind /proc $HOME/live-ubuntu-from-scratch/chroot/proc
+sudo mount --bind /sys $HOME/live-ubuntu-from-scratch/chroot/sys
+
+sudo chroot $HOME/live-ubuntu-from-scratch/chroot
+
+# custom script
+chmod +x /usr/local/bin/your-script.sh
+
+exit
+mkdir -p $HOME/live-ubuntu-from-scratch/image/{casper,isolinux}
+cp $HOME/live-ubuntu-from-scratch/chroot/boot/vmlinuz-* $HOME/live-ubuntu-from-scratch/image/casper/vmlinuz
+cp $HOME/live-ubuntu-from-scratch/chroot/boot/initrd.img-* $HOME/live-ubuntu-from-scratch/image/casper/initrd
+
+sudo mksquashfs $HOME/live-ubuntu-from-scratch/chroot $HOME/live-ubuntu-from-scratch/image/casper/filesystem.squashfs -noappend
+
+sudo xorriso -as mkisofs -o $HOME/custom-ubuntu.iso -r -J -V "Custom Ubuntu" -cache-inodes -isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin -eltorito-boot isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 -boot-info-table $HOME/live-ubuntu-from-scratch/image
+
+sudo umount $HOME/live-ubuntu-from-scratch/chroot/dev
+sudo umount $HOME/live-ubuntu-from-scratch/chroot/proc
+sudo umount $HOME/live-ubuntu-from-scratch/chroot/sys
+

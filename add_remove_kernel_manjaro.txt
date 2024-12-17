@@ -1,0 +1,16 @@
+Over MHWD (Manjaro Hardware Detection) you can also manage the kernel.
+
+# List avaiable kernels 
+mhwd-kernel -l
+
+# Install a specific kernel
+sudo mhwd-kernel -i linuxXYZ
+
+# Remove a kernel
+sudo mhwd-kernel -r linuxXYZ
+
+# Update Grub if needed
+sudo update-grub
+
+# Reboot the system
+sudo reboot
