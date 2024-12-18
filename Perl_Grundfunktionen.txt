@@ -1,0 +1,47 @@
+Perl ist eine mächtige Programmiersprache, die viele eingebaute Funktionen bietet, ohne dass zusätzliche Module geladen werden müssen. Hier sind einige der grundlegenden Funktionen und Features, die Perl von Haus aus bereitstellt:
+
+    Skalar- und Array-Operationen:
+        Skalarvariablen: $variable
+        Arrays: @array
+        Hashes: %hash
+
+    Eingabe und Ausgabe:
+        print: Gibt Daten auf der Konsole aus.
+        chomp: Entfernt das Zeilenende von einer Variablen.
+        <>: Liest Eingaben von der Standardeingabe oder von Dateien.
+
+    Kontrollstrukturen:
+        if, elsif, else: Bedingte Anweisungen.
+        for, foreach, while, until: Schleifen zur Iteration über Daten.
+
+    Subroutinen:
+        sub: Definiert eine Funktion oder Subroutine.
+
+    String- und Zahlenoperationen:
+        String-Operatoren: . (Verkettung), eq, ne, lt, gt, etc. (Vergleich).
+        Mathematische Operatoren: +, -, *, /, %, ** (Exponentiation).
+
+    Reguläre Ausdrücke:
+        m//: Mustervergleich.
+        s///: Ersetzen von Mustern.
+        qr//: Erstellen von regulären Ausdrucks-Referenzen.
+
+    Dateioperationen:
+        open: Öffnet eine Datei.
+        close: Schließt eine Datei.
+        read, print: Lesen und Schreiben in Dateien.
+
+    Fehlerbehandlung:
+        die: Beendet das Programm mit einer Fehlermeldung.
+        warn: Gibt eine Warnung aus, ohne das Programm zu beenden.
+
+    Datenstrukturen:
+        Arrays und Hashes können geschachtelt werden, um komplexe Datenstrukturen zu erstellen.
+
+    Referenzen:
+        Erstellen und Verwenden von Referenzen auf Arrays und Hashes.
+
+    Ein- und Ausgabeformatierung:
+        printf und sprintf: Formatierte Ausgabe.
+
+Diese Funktionen und Features sind in Perl integriert und können ohne die Verwendung zusätzlicher Module verwendet werden. Perl ist bekannt für seine Flexibilität und die Möglichkeit, mit Text und Daten auf verschiedene Arten zu arbeiten, was es zu einer beliebten Wahl für Skripting und Systemadministration macht.

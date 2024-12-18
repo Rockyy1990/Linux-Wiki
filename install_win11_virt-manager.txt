@@ -1,0 +1,65 @@
+(Windows 11 install on qemu)
+
+Virtmanager Settings
+
+Allgemein
+ - XML Bearbeitung aktivieren
+ - Enable libguestfs VM introspection
+
+Abruf
+
+ - CPU-Verwendung abrufen
+
+Neue VM
+
+Grafiktyp - Systemvorgabe (spice)
+
+Speichertyp - Systemvorgabe (qcow2)
+
+CPU-Vorgabe - host-passthrough
+
+x86 Firmware: System default
+
+--------------------------------------------------
+
+Wähle Betriebssystem aus: Windows 11
+
+Speicher: 8192 MB
+
+CPUs: Max available 
+
+
+Speicher für Virtuelle Maschine
+
+Benutzerdefinierten Speicher auswählen: Verwalten -> Pool anlegen auf /home/lxadmin/ -> Datenträger + 80gb qcow2
+
++ Konfiguration bearbeiten vor der Installation  -> Fertig
+
+
+Geräte:
+
+Tablett -> löschen
+
+Channel -> löschen. 
+Neu erstellen: Channel: GeräteTyp:unix  Zieltyp: virtio  Zielname: org.libguestfs.channel.0
+
+TPM (Falls vorhanden -> löschen und nach dem erstellen der VM neu erstellen) -> Emulated -> Modell: CRB Version: 2.0
+
+Sata Festplatte 1 -> Puffermodus: writeback  Mode verwerfen: unmap
+
+Neu erstellen: Speicher -> Gerätetyp: CDROM-Gerät -> Verwalten: Pfad zur Install ISO
+
+Boot-Optionen: SATA CDROM auf erste stelle setzen
+
+
+Installation beginnen. Änderungen können nach der Installation vorgenommen werdeen.
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+Here are some kernel variables that can be used in GRUB to improve system performance:
+
+    quiet: Disables most kernel messages, which can speed up boot time.
+    
+    splash: Enables the splash screen, which can also speed up boot time by hiding kernel messages.
+    
+    nomodeset: Disables kernel mode setting, which can improve performance on systems with older graphics cards.
+    
+    acpi=off: Disables ACPI (Advanced Configuration and Power Interface), which can improve performance on systems with older hardware.
+    
+    noapic: Disables APIC (Advanced Programmable Interrupt Controller), which can improve performance on systems with older hardware.
+    
+    nolapic: Disables local APIC, which can improve performance on systems with older hardware.
+    
+    irqpoll: Enables interrupt polling, which can improve performance on systems with high interrupt rates.
+    
+    highres=on: Enables high-resolution timer, which can improve performance on systems with high-precision timing requirements.
+    
+    elevator=deadline: Sets the I/O scheduler to deadline, which can improve performance on systems with high I/O loads.
+    
+    pcie_aspm=force: Enables PCIe Active State Power Management, which can improve performance on systems with PCIe devices.
+    
+    intel_idle.max_cstate=1: Sets the maximum C-state for Intel CPUs, which can improve performance on systems with Intel CPUs.
+    
+    processor.max_cstate=1: Sets the maximum C-state for all CPUs, which can improve performance on systems with multiple CPUs.
+    
+    zswap.enabled=1: Enables zswap, which can improve performance on systems with high swap usage.
+    
+    zswap.zpool=z3fold: Sets the zswap zpool to z3fold, which can improve performance on systems with high swap usage.
+    
+    iommu=soft: Enables software IOMMU, which can improve performance on systems with high I/O loads.
+    
+    iommu=pt: Enables passthrough IOMMU, which can improve performance on systems with high I/O loads.
+    
+    rcu_nocbs=0-15: Disables RCU callbacks on CPUs 0-15, which can improve performance on systems with high CPU usage.
+    
+    rcu_nocb_poll: Enables RCU callback polling, which can improve performance on systems with high CPU usage.
+    
+    nohz_full=0-15: Disables nohz_full on CPUs 0-15, which can improve performance on systems with high CPU usage.
+    
+    nohz_full_rcu_nocbs=0-15: Disables nohz_full RCU callbacks on CPUs 0-15, which can improve performance on systems with high CPU usage.
+    
+    idle=poll: Enables idle polling, which can improve performance on systems with high CPU usage.
+    
+    idle=halt: Enables idle halt, which can improve performance on systems with high CPU usage.
+    
+    tsc=reliable: Enables reliable TSC, which can improve performance on systems with high CPU usage.
+    
+    clocksource=tsc: Sets the clocksource to TSC, which can improve performance on systems with high CPU usage.
+    
+    clocksource=hpet: Sets the clocksource to HPET, which can improve performance on systems with high CPU usage.
+    
+    hpet=enable: Enables HPET, which can improve performance on systems with high CPU usage.
+    
+    acpi_enforce_resources=lax: Sets the ACPI resource enforcement to lax, which can improve performance on systems with high CPU usage.
+    
+    acpi_enforce_resources=strict: Sets the ACPI resource enforcement to strict, which can improve performance on systems with high CPU usage.
+
+
+Here's an example of how to add these variables to your GRUB configuration:
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash nomodeset acpi=off noapic nolapic irqpoll highres=on elevator=deadline pcie_aspm=force intel_idle.max_cstate=1 processor.max_cstate=1"
+

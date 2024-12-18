@@ -1,0 +1,48 @@
+#!/bin/zsh
+
+# Function to install a package
+install_package() {
+    sudo pacman -S --noconfirm "$1"
+}
+
+# Function to display the menu
+show_menu() {
+    echo "=============================="
+    echo " Post-Installation Menu"
+    echo "=============================="
+    echo "1) Install Firefox"
+    echo "2) Install VLC"
+    echo "3) Install GIMP"
+    echo "4) Install Visual Studio Code"
+    echo "5) Install Git"
+    echo "6) Install Neofetch"
+    echo "7) Install All"
+    echo "8) Exit"
+    echo "=============================="
+    echo -n "Please choose an option [1-8]: "
+}
+
+# Main script
+while true; do
+    show_menu
+    read -r choice
+
+    case $choice in
+        1) install_package "firefox" ;;
+        2) install_package "vlc" ;;
+        3) install_package "gimp" ;;
+        4) install_package "code" ;;  # Make sure you have the AUR helper installed for VS Code
+        5) install_package "git" ;;
+        6) install_package "neofetch" ;;
+        7)
+            install_package "firefox"
+            install_package "vlc"
+            install_package "gimp"
+            install_package "code"
+            install_package "git"
+            install_package "neofetch"
+            ;;
+        8) echo "Exiting..."; exit 0 ;;
+        *) echo "Invalid option. Please try again." ;;
+    esac
+done
