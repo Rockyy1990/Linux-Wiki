@@ -16,6 +16,9 @@
 ^mads\.
 ^pixels?[-.]
 ^stat(s|istics)?[0-9]*[_.-]
+.*ads.*
+.*\.tracking\..*
+
 
 
 
@@ -34,6 +37,47 @@ https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.tx
 
 # Phishing
 https://phishing.army/download/phishing_army_blocklist.txt
+
+
+# NoProxies
+https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/proxies
+
+
+# Gambling
+https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/gambling
+
+
+# Streaming
+https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/Streaming
+
+
+# Domain Squatting
+https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/DomainSquatting1
+
+https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/DomainSquatting2
+
+
+# Ransomware
+https://raw.githubusercontent.com/blocklistproject/Lists/master/ransomware.txt
+
+
+# Jugendschutz
+https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/child-protection
+
+
+# Fake Science
+https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/Fake-Science
+
+
+# Facebook
+https://raw.githubusercontent.com/crpietschmann/pi-hole-blocklist/main/social-media/blocklist-social-facebook.txt
+
+# Tiktok
+https://raw.githubusercontent.com/crpietschmann/pi-hole-blocklist/main/social-media/blocklist-social-tiktok.txt
+
+
+
+
 
 
 
