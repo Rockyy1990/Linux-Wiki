@@ -111,12 +111,14 @@ https://192.68.0.3:10000
 
 
 
+
 # Pi-Hole:
 
 curl -sSL https://install.pi-hole.net | bash
 
 # After install and config. 
 http://192.168.0.3/admin
+
 
 
 
@@ -149,11 +151,31 @@ iface vmbr0 inet manual
    netmask 255.255.255.0
    bridge-ports eth0
    bridge-stp off
-   bridge-fd
+   bridge-fd 0
+
+
+# Set the Root Password (if not allready set)
+sudo passwd root
+
+
+# hosts settings
+127.0.0.1       raspberrypi   (change the 127.0.0.1 to 192.168.0.3)
+
+check the settings with "hostname --ip-address"
+
+
+sudo reboot
 
 
 # Install Proxmox VE:
-sudo apt install proxmox-ve postfix open-iscsi pve-edk2-firmware-aarch64
+sudo apt update && sudo apt install proxmox-ve postfix open-iscsi pve-edk2-firmware-aarch64
+
+# UFW settings
+sudo ufw allow 8006/tcp   # Proxmox web interface
+sudo ufw allow 5404/udp   # Cluster communication
+sudo ufw allow 5405/udp   # Cluster communication
+sudo ufw allow 5900:5999/tcp  # VNC console ports (adjust range as needed)
+sudo ufw allow 3128/tcp    # Spice console
 
 
 # After install and config.
