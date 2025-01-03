@@ -15,8 +15,11 @@
 sudo apt update
 sudo apt dist-upgrade
 
+# Set root passwod (if is not allready set)
+sudo passwd root
+
 sudo apt install -y fakeroot flashrom smartmontools quota bridge-utils xfsdump mtools f2fs-tools curl openssl samba nfs-kernel-server
-sudo apt install cpufrequtils htop
+sudo apt install cpufrequtils htop libpam-runtime python unzip apache2
 sudo cpufreq-set -g performance
 
 
@@ -34,6 +37,10 @@ sudo ufw allow from 192.168.1.0/24 to any port 443   # Optional
 
 
 sudo ufw enable
+
+
+# Install latest stable kernel
+sudo apt install raspberrypi-kernel
 
 
 # Recommended /boot/config.txt Settings for Raspberry Pi 5
@@ -122,62 +129,25 @@ http://192.168.0.3/admin
 
 
 
+# Webserver with Lighttpd
 
-# Proxmox VE:
+Lighttpd without php supports static webseites. (HTML, CSS and JavaScript)
 
-curl -L https://mirrors.apqa.cn/proxmox/debian/pveport.gpg | sudo tee /usr/share/keyrings/pveport.gpg > /dev/null
+sudo apt install lighttpd -y
 
-echo "deb [arch=arm64 signed-by=/usr/share/keyrings/pveport.gpg] https://mirrors.apqa.cn/proxmox/debian/pve bookworm port" | sudo tee /etc/apt/sources.list.d/pveport.list
+Now you can put static files (HTML, CSS, JavaScript) in this directory: /var/www/html/
 
-sudo apt install ifupdown2
+After this you must restart lighttpd:
 
-If you encounter an error, remove the temporary file and try again:
-sudo rm /tmp/.ifupdown2-first-install
-sudo apt install ifupdown2
+sudo service lighttpd restart
 
-sudo nano /etc/network/interfaces
+Webbrowser:
 
-# Add the following configuration, replacing <IPADDRESS> and <GATEWAY> with your actual values:
-
-auto lo
-iface lo inet loopback
-auto eth0
-iface eth0 inet manual
-auto vmbr0
-
-iface vmbr0 inet manual
-   address <IPADDRESS>
-   gateway <GATEWAY>
-   netmask 255.255.255.0
-   bridge-ports eth0
-   bridge-stp off
-   bridge-fd 0
+http://<ip-address>/index.html
 
 
-# Set the Root Password (if not allready set)
-sudo passwd root
 
 
-# hosts settings
-127.0.0.1       raspberrypi   (change the 127.0.0.1 to 192.168.0.3)
-
-check the settings with "hostname --ip-address"
 
 
-sudo reboot
-
-
-# Install Proxmox VE:
-sudo apt update && sudo apt install proxmox-ve postfix open-iscsi pve-edk2-firmware-aarch64
-
-# UFW settings
-sudo ufw allow 8006/tcp   # Proxmox web interface
-sudo ufw allow 5404/udp   # Cluster communication
-sudo ufw allow 5405/udp   # Cluster communication
-sudo ufw allow 5900:5999/tcp  # VNC console ports (adjust range as needed)
-sudo ufw allow 3128/tcp    # Spice console
-
-
-# After install and config.
-https://<IPADDRESS>:8006
 
