@@ -2,7 +2,6 @@
 
 # Regular Expressions (Regex): 
 
-^ad([sxv]?[0-9]*|system)[_.-]([^.[:space:]]+\.){1,}|[_.-]ad([sxv]?[0-9]*|system)[_.-]
 ^(.+[_.-])?adse?rv(er?|ice)?s?[0-9]*[_.-]
 ^(.+[_.-])?telemetry[_.-]
 ^adim(age|g)s?[0-9]*[_.-]
@@ -18,12 +17,19 @@
 ^stat(s|istics)?[0-9]*[_.-]
 .*ads.*
 .*\.tracking\..*
+^(.+[_.-])?(facebook|fb(cdn|sbx)?|tfbnw)\.[^.]+$
+^https?://(www\.)?livejasmin\.com/(en|de|fr)/[a-zA-Z0-9_-]+$
+^https?://(www\.)?xhamsterlive\.com/(en|de|fr)/[a-zA-Z0-9_-]+$
 
 
 
 
 # Easylist
 https://easylist.to/easylist/easylist.txt
+
+# Easyprivacy
+https://github.com/ZingyAwesome/easylists-for-pihole/blob/master/easyprivacy.txt
+
 
 # Fanboy's Annoyance List
 https://easylist.to/easylist/fanboy-annoyance.txt
