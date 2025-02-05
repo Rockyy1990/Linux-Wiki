@@ -1,0 +1,30 @@
+Die ELEVATOR-Variable ist eine Umgebungsvariable, die in einigen Linux-Systemen verwendet wird, 
+um den I/O-Scheduler für Blockgeräte festzulegen. Der I/O-Scheduler ist ein Teil des Linux-Kernels, 
+der dafür verantwortlich ist, wie Lese- und Schreibanfragen an Speichergeräte (wie Festplatten oder SSDs) verwaltet werden.
+Verwendung der ELEVATOR-Variable
+
+Zweck: Die ELEVATOR-Variable wird verwendet, um den gewünschten I/O-Scheduler für das System oder für bestimmte Blockgeräte zu definieren. 
+Dies kann in der Regel in Konfigurationsdateien wie /etc/default/grub oder in Systemd-Diensten festgelegt werden, um sicherzustellen, 
+dass der Scheduler beim Booten des Systems korrekt eingestellt wird.
+
+Beispiel: In einer GRUB-Konfiguration könnte man die ELEVATOR-Variable wie folgt verwenden, 
+um den I/O-Scheduler auf kyber zu setzen:
+
+GRUB_CMDLINE_LINUX_DEFAULT="... elevator=kyber"
+
+
+Verfügbare I/O-Scheduler
+
+Es gibt mehrere I/O-Scheduler, die in Linux verwendet werden können, darunter:
+
+    noop: Ein einfacher Scheduler, der keine komplexen Entscheidungen trifft und Anfragen in der Reihenfolge bearbeitet, in der sie eintreffen.
+    deadline: Ein Scheduler, der sicherstellt, dass keine Anfrage zu lange wartet, indem er Fristen für die Bearbeitung von Anfragen festlegt.
+    cfq (Completely Fair Queuing): Ein Scheduler, der versucht, allen Prozessen einen fairen Zugang zu den I/O-Ressourcen zu gewähren.
+    bfq (Budget Fair Queueing): Ein fortschrittlicher Scheduler, der Budgets für Prozesse festlegt und diese basierend auf ihren I/O-Anforderungen priorisiert.
+    kyber: Ein moderner Scheduler, der auf niedrige Latenz und hohe Durchsatzraten optimiert ist.
+
+Fazit
+Die ELEVATOR-Variable ist also ein Mechanismus, um den I/O-Scheduler in Linux zu konfigurieren. 
+Sie wird nicht direkt in der /etc/environment-Datei verwendet, 
+sondern eher in Bootloader-Konfigurationen oder Systemd-Diensten, um sicherzustellen, 
+dass der gewünschte Scheduler beim Systemstart aktiv ist.
