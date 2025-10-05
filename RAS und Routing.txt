@@ -1,0 +1,43 @@
+RAS (Remote Access Service) ermöglicht externen Benutzern den Zugriff auf ein internes Netzwerk, 
+während Routing die Weiterleitung von Datenpaketen zwischen verschiedenen Netzwerken oder Subnetzen ist. 
+Microsofts Routing- und Remotezugriffsdienst (RRAS) kombiniert diese Funktionen, indem er es Computern erlaubt,
+eine Verbindung zu einem entfernten Netzwerk herzustellen (RAS) und gleichzeitig die Datenverkehrsweiterleitung, 
+VPN-Unterstützung und NAT für Netzwerke zu verwalten (Routing). 
+Remote Access Service (RAS)
+
+    Zweck:
+    Ermöglicht es Benutzern von außerhalb eines Netzwerks, sich mit diesem zu verbinden, beispielsweise über das Internet. 
+
+Funktionen:
+
+    Unterstützung von DFÜ (Modem) und VPN-Verbindungen. 
+
+Authentifizierung und Verwaltung von Verbindungsanforderungen. 
+Verwaltung von Client-Verbindungen und Telefonbucheinträgen. 
+
+
+Routing
+
+    Zweck:
+    Der Prozess der Weiterleitung von Datenpaketen von einer Quelle zu einem Ziel über verschiedene Netzwerkpfade. 
+
+Funktionen:
+
+    Unicast-Routing: Weiterleitung einzelner Datenströme, z. B. für IP und AppleTalk. 
+
+Multicast-Routing: Weiterleitung von Datenverkehr an mehrere Ziele gleichzeitig. 
+Netzwerkadressübersetzung (NAT): Vereinfacht den Zugriff kleinerer privater Netzwerke auf das Internet. 
+Paketfilterdienst: Erhöht die Sicherheit durch das Filtern von Datenpaketen. 
+Routingprotokolle: Ermöglicht die dynamische Erkennung von Netzwerkrouten, z. B. RIP (Routing Information Protocol) und OSPF (Open Shortest Path First). 
+
+Routing und Remotezugriffsdienst (RRAS)
+
+    Kombination:
+    Der Dienst integriert sowohl Routing- als auch Remotezugriffsfunktionen in einem einzigen Windows-Server-Dienst. 
+
+Anwendungsfälle:
+
+    VPN-Zugriff: Ermöglicht es Benutzern, sich sicher mit dem Netzwerk zu verbinden. 
+
+Netzwerk-Routing: Funktioniert als Gateway und leitet Datenverkehr zwischen verschiedenen Netzwerken weiter. 
+Kosteneinsparungen: Bietet zahlreiche Funktionen zur Kosteneinsparung, wie NAT und eine breite Unterstützung für Hardware. 
