@@ -1,0 +1,40 @@
+
+#
+# FFMPEG Converter
+#
+
+- Convert Video
+
+:: x264
+
+# Convert to x264 vb and aac 224k 2.0 medium preset
+ffmpeg.exe -i D:\quelldatei -vcodec libx264 -vb 2400k -tune film -tune fastdecode -preset medium -acodec aac -ab 224k -ac 2 D:\ausgabe.mp4
+
+# Convert to x264 crf and aac 224k 2.0 medium preset
+ffmpeg.exe -i D:\quelldatei -vcodec libx264 -crf 20 -tune film -tune fastdecode -preset medium -acodec aac -ab 224k -ac 2 D:\ausgabe.mp4
+
+# Convert to x264 vb and 224k 2.0 medium preset and high profile lvl 4
+ffmpeg.exe -i D:\quelldatei -vcodec libx264 -vb 2400k -vprofile high -level 40 -s 1920x1080 -tune film -tune fastdecode -preset medium -acodec aac -ab 224k -ac 2 -y D:\ausgabe.mp4 
+
+
+:: x265
+
+# Convert to x265 aac 224k
+ffmpeg -i D:\input -c:v libx265 -crf 21 -tune film -tune fastdecode -preset medium -c:a aac -b:a 224k -ac 2 D:\output.mp4
+
+# Convert to x265 vb and aac 224k 2.0 medium preset
+ffmpeg -i D:\input -c:v libx265 -vb 2400k -tune film -tune fastdecode -preset medium -c:a aac -b:a 224k -ac 2 D:\output.mp4
+
+
+- Convert into Audio
+
+# into aac 256k
+ffmpeg -i input.wav -c:a aac -b:a 256k output.aac
+
+# recoding
+ffmpeg -i input-video.mp4 -acodec copy output.mp3
+
+
+# simple command to extract audio from a video file
+ffmpeg -i input-video.mp4 output-audio.mp3
+
